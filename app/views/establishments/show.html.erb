@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="new-form">
+    <div class="featurette">
+      <h2 class="featurette-heading" style="color:red;">this is an establishment</h2>
+      <div class="field">
+        <h3> <%= @establishment.name %> </h3>
+        <p>
+          <strong>Keyword:</strong>
+          <%= @establishment.key %>
+        </p>
+        <p>
+          <%= @establishment.email %>
+        </p>
+        <p>
+          <%= @establishment.address %>
+          <%= @establishment.city %>
+          <%= @establishment.state %>
+          <%= @establishment.zipcode %>
+        </p>
+
+
+
+<%= link_to 'Edit', edit_establishment_path(@establishment) %> |
+<%= link_to 'Back', establishments_path %>

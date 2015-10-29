@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<div class="new-form">
+    <div class="featurette">
+      <h2 class="featurette-heading" style="color:red;">this is a deal</h2>
+      <div class="field">
+		<p>
+		  <%= @deal.keyword %>
+		</p>
+		<p>
+		  <strong>what it is</strong>
+		  <%= @deal.description %>
+		</p>
+		<p>
+		  <strong>Current:</strong>
+		  <%= @deal.current %>
+		</p>
+		<p>
+		  <strong>Permanent:</strong>
+		  <%= @deal.permanent %>
+		</p>
+	  </div>
+	  <%= link_to 'Edit', edit_deal_path(@deal) %> |
+	  <%= link_to 'Back', deals_path %>
+	</div>
+</div>
+
+

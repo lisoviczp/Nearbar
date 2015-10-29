@@ -1,0 +1,33 @@
+<h1>Listing establishments <%= link_to 'New Establishment', new_establishment_path %> </h1>
+
+
+
+
+<div class="my-table-container">
+  <% @establishments.each do |establishment| %>
+    <div class="featurette">
+        <h3 class="featurette-heading" style="color:red;"> <%= establishment.name %></h3>
+        <div class="field">
+          <p>
+           <%= establishment.key %>
+          </p>
+          <p>
+           <%= establishment.address %>
+           <%= establishment.city %>
+           <%= establishment.state %>
+           <%= establishment.zipcode %>
+           <%= establishment.email %> </br>
+           <%= link_to 'Show', establishment %>
+          </p>
+
+<!--         <td><% link_to 'Show', establishment %></td>
+        <td><% link_to 'Edit', edit_establishment_path(establishment) %></td>
+        <td><% link_to 'Destroy', establishment, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+        </div>
+        <hr class="featurette-divider"/>
+    </div>
+  <% end %>
+</div>
+
+
+<br>

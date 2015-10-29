@@ -1,0 +1,44 @@
+<!-- = simple_form_for(@user, html: { class: 'form-horizontal' }) do |form| -->
+
+<div class="new-form">
+  <h1> what's going on </h1>
+  <%= simple_form_for(@deal, html: { class: 'form-horizontal' }) do |f| %>
+    <% if @deal.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h2>
+
+        <ul>
+        <% @deal.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="featurette">
+      <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
+      <h2 class="featurette-heading" style="color:red;">give it a name</h2>
+        <div class="field">
+          <!-- <%= f.label :keyword %><br> -->
+          <%= f.text_field :keyword %>
+        </div>
+      <p class="lead">what is it? </br>
+        <%= f.text_area :description %>
+      </p>
+    </div>
+
+    <div class="featurette">
+      <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
+      <h2 class="featurette-heading" style="color:red;">Current?Permanent?</h2>
+      <div class="field">
+        <%= f.label :current %>
+        <%= f.check_box :current %></br>
+        <%= f.label :permanent %>
+        <%= f.check_box :permanent %></br>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

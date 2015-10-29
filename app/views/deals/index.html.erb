@@ -1,0 +1,49 @@
+  <!-- Le styles -->
+  <link href="../assets/css/bootstrap.css" rel="stylesheet">
+  <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+
+<!--   Inside your views, use the 'simple_form_for' with one of the Bootstrap form
+  classes, '.form-horizontal' or '.form-inline', as the following:
+
+    = simple_form_for(@user, html: { class: 'form-horizontal' }) do |form| -->
+<style>
+
+.featurette {
+  /*border: 2px solid gray;*/
+}
+
+.featurette-heading {
+  /*border: 1px solid black;*/
+}
+
+</style>
+
+<h1>Listing deals  <%= link_to 'New Deal', new_deal_path %> </h1>
+
+
+
+<div class="my-table-container">
+  <% @deals.each do |deal| %>
+    <div class="featurette">
+        <h3 class="featurette-heading" style="color:red;"> <%= deal.keyword %></h3>
+        <div class="field">
+          <%= deal.description %>
+          <% if deal.current %>
+            <p>limited time only </p>
+          <% elsif deal.permanent %>
+            <p> every week! </p>
+          <% end %>
+          <p><%= link_to 'show me more', deal %></br>
+          <%= link_to 'edit', edit_deal_path(deal) %></p>
+          <!-- <td><% link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+        </div>
+        <hr class="featurette-divider"/>
+    </div>
+  <% end %>
+</div>
+
+
+<br>
+
+
