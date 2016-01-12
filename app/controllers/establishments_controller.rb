@@ -23,6 +23,34 @@ class EstablishmentsController < ApplicationController
   def edit
   end
 
+  def favorite
+    type = params[:type]
+    @establishment=Establishment.find(params[:id])
+    @current_user=User.first
+    if type == "favorite"
+      # pry
+      # @current_user=User.first
+      @current_user.favorites << @establishment
+      redirect_to :back, notice: "You favorited #{@establishment.name}"
+
+    elsif type == "unfavorite"
+      @current_user.favorites.delete(@establishment)
+      redirect_to :back, notice: "Unfavorited #{@establishment.name}"
+
+    else
+      # Type missing, nothing happens
+      redirect_to :back, notice: 'Nothing happened.'
+    end
+  end
+
+
+  def favorites_page
+    @current_user = User.first
+    @establishments = @current_user.favorites
+    respond_with(@establishments)
+  end
+
+
   def create
     @establishment = Establishment.new(establishment_params)
     @establishment.save
