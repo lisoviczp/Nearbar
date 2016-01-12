@@ -3,11 +3,10 @@
 
 <div class="new-form">
     <div class="featurette">
-      <h2 class="featurette-heading" style="color:red;">this is an establishment</h2>
+      <h2 class="featurette-heading" style="color:red;"><%= @establishment.name %></h2>
       <div class="field">
-        <h3> <%= @establishment.name %> </h3>
         <p>
-          <strong>Keyword:</strong>
+          <strong>Keywords:</strong>
           <%= @establishment.key %>
         </p>
         <p>
@@ -19,8 +18,58 @@
           <%= @establishment.state %>
           <%= @establishment.zipcode %>
         </p>
+      </div>
+    <%= link_to 'Edit', edit_establishment_path(@establishment) %> |
+    <%= link_to 'Back', establishments_path %>
+    </div>
+</div>  
 
 
+<div class="left-form-container">
+    <div class="featurette">
+      <% if @current_deals.length > 0 %>
+        <h2 class="featurette-heading" style="color:red;">these are the current deals</h2>
+      <% else %>
+        <h2 class="featurette-heading" style="color:red;">There are no current deals available</h2>
+      <% end %>
+      <div class="field">
+        <% @current_deals.reverse.each do |deal| %>
+          <%= link_to 'View Deal', deal_path(deal) %> </br>
+          <%= deal.keyword %>
+          <% deal.description %> </br>
+          <!-- updated at: <% deal.updated_at.to_formatted_s(:long)%> -->
+          Updated at: <%= deal.updated_at.strftime("%b %d, %Y at %I:%M%p") %>
+          <hr>
+        <% end %>
+      </div>
+    </div>
+</div>
 
-<%= link_to 'Edit', edit_establishment_path(@establishment) %> |
-<%= link_to 'Back', establishments_path %>
+<div class="right-form-container">
+    <div class="featurette">
+      <% if @permanent_deals.length > 0 %>
+        <h2 class="featurette-heading" style="color:red;">these are the permanent deals</h2>
+      <% else %>
+        <h2 class="featurette-heading" style="color:red;">There are no permanent deals available</h2>
+      <% end %>
+      <div class="field">
+        <% @permanent_deals.reverse.each do |deal| %>
+          <%= link_to 'View Deal', deal_path(deal) %> </br>
+          <%= deal.keyword %>
+          <% deal.description %>  </br>
+          Updated at: <%= deal.updated_at.strftime("%b %d, %Y at %I:%M%p") %>
+
+          <hr>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+
+<table style="display:none;">
+<th> Current Deals</th>
+<th> Permanent Deals</th>
+  <td>
+    <tr> </tr>
+  </td>
+</table>

@@ -9,6 +9,9 @@ class EstablishmentsController < ApplicationController
   end
 
   def show
+    @current_deals = Deal.all.where(establishment_id: @establishment, current: true)
+    @permanent_deals = Deal.all.where(establishment_id: @establishment, permanent: true)
+    # pry
     respond_with(@establishment)
   end
 
@@ -42,6 +45,6 @@ class EstablishmentsController < ApplicationController
     end
 
     def establishment_params
-      params.require(:establishment).permit(:name, :address, :city, :state, :zipcode, :email, :key)
+      params.require(:establishment).permit(:name, :address, :city, :state, :zipcode, :email, :key, deals: [])
     end
 end

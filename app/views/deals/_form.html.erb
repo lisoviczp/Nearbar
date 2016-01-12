@@ -28,12 +28,20 @@
 
     <div class="featurette">
       <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
-      <h2 class="featurette-heading" style="color:red;">Current?Permanent?</h2>
+      <h2 class="featurette-heading" style="color:red;">Current? Permanent?</h2>
       <div class="field">
         <%= f.label :current %>
         <%= f.check_box :current %></br>
         <%= f.label :permanent %>
         <%= f.check_box :permanent %></br>
+      </div>
+    </div>
+
+    <div class="featurette">
+      <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
+      <h2 class="featurette-heading" style="color:red;">Establishment</h2>
+      <div class="field">
+          <%= f.collection_select :establishment, Establishment.all, :id, :name %>
       </div>
     </div>
 

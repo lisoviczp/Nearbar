@@ -1,12 +1,13 @@
-<h1>Listing establishments <%= link_to 'New Establishment', new_establishment_path %> </h1>
 
+<h2 class="featurette-heading" style="float:left;margin-left:1%;color:red;">Listing establishments </h2>
 
+<h2 style="float:right;margin-right:1%;"> <%= link_to 'New', new_establishment_path %> </h2>
 
 
 <div class="my-table-container">
   <% @establishments.each do |establishment| %>
     <div class="featurette">
-        <h3 class="featurette-heading" style="color:red;"> <%= establishment.name %></h3>
+        <h3 class="featurette-heading" style="color:red;"> <%= link_to establishment.name, establishment %></h3>
         <div class="field">
           <p>
            <%= establishment.key %>
@@ -15,9 +16,8 @@
            <%= establishment.address %>
            <%= establishment.city %>
            <%= establishment.state %>
-           <%= establishment.zipcode %>
+           <%= establishment.zipcode %> </br>
            <%= establishment.email %> </br>
-           <%= link_to 'Show', establishment %>
           </p>
 
 <!--         <td><% link_to 'Show', establishment %></td>

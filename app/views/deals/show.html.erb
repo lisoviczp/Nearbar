@@ -1,23 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<div class="new-form">
+<h2 class="featurette-heading" id="center-text" style="color:red;">this is a deal!</h2>
+
+<div class="new-wider-form">
     <div class="featurette">
-      <h2 class="featurette-heading" style="color:red;">this is a deal</h2>
       <div class="field">
-		<p>
-		  <%= @deal.keyword %>
+		<% if @deal.establishment %> 
+		<p style="display:inline;">
+		   where? 
+		   <div id="details"> <%= link_to @deal.establishment.name, establishment_path(@deal.establishment) %> </div>
 		</p>
-		<p>
-		  <strong>what it is</strong>
-		  <%= @deal.description %>
+	   <% end %>
+		<p style="display:inline;">
+		  what is it?
+		  <div id="details"><%= @deal.keyword %></div>
 		</p>
-		<p>
-		  <strong>Current:</strong>
-		  <%= @deal.current %>
+		<p style="display:inline;">
+		  details?
+		  <div id="details"><%= @deal.description %></div>
 		</p>
-		<p>
-		  <strong>Permanent:</strong>
-		  <%= @deal.permanent %>
+		<p style="display:inline;">
+		  temporary?
+		  <div id="details"><%= @deal.current %></div>
+		</p>
+		<p style="display:inline;">
+		  permanent?
+		  <div id="details"><%= @deal.permanent %> </div>
 		</p>
 	  </div>
 	  <%= link_to 'Edit', edit_deal_path(@deal) %> |

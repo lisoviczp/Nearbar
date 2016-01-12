@@ -20,12 +20,50 @@
 	border: 2px solid green;
 
 	margin-left: 30%;
-	margin-top: 7.5em;
-	margin-bottom: 20em;
+	margin-top: 2.5em;
+	margin-bottom: 4em;
 	padding-top: 1em;
 	padding-left: 3em;
 	padding-right: 3em;
 	padding-bottom: 7em;
+}
+
+.new-wider-form {
+  width: 60%;
+  /*text-align: center;*/
+  border: 2px solid green;
+  margin-left: 20%;
+  margin-top: 2.5em;
+  margin-bottom: 4em;
+  padding-top: 1em;
+  padding-left: 3em;
+  padding-right: 3em;
+  padding-bottom: 7em;
+}
+
+.left-form-container {
+  width: 49%;
+  /*text-align: center;*/
+  border: 2px solid green;
+  float:left;
+  margin-left: 1%;
+  padding-top: 1em;
+  /*padding-left: 3em;*/
+  /*padding-right: 3em;*/
+  padding-bottom: 3em;
+}
+
+
+.right-form-container {
+  width: 49%;
+  /*text-align: center;*/
+  border: 2px solid green;
+  float: right;
+  margin-right: 1%;
+  padding-top: 1em;
+  /*padding-left: 3em;*/
+  /*padding-right: 3em;*/
+  padding-bottom: 3em;
 }
 
 .my-table-container {
@@ -105,3 +143,16 @@
   /*line-height: 1;*/
   letter-spacing: -1px;
 }
+
+#center-text {
+  text-align: center;
+}
+
+#details  {
+  font-size: 1.5em;
+  display: inline;
+  font-weight: 100;
+}
+/*a {
+  color: green;
+}*/

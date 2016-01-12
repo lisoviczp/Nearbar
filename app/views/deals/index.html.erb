@@ -28,6 +28,9 @@
     <div class="featurette">
         <h3 class="featurette-heading" style="color:red;"> <%= deal.keyword %></h3>
         <div class="field">
+          <% if deal.establishment %>
+            <p> where: <%= deal.establishment.name %> </p>
+          <% end %>
           <%= deal.description %>
           <% if deal.current %>
             <p>limited time only </p>
