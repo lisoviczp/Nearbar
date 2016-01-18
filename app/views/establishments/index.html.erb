@@ -16,6 +16,16 @@
            <%= establishment.state %>
            <%= establishment.zipcode %> </br>
            <%= establishment.email %> </br>
+            <% if establishment.deals.where(current: true).size > 0 %>
+               <%= establishment.deals.where(current: true).size %> Current Deals </br>
+            <% else %>
+              0 Current Deals </br>
+            <% end %>
+            <% if establishment.deals.where(permanent: true).size > 0 %>
+               <%= establishment.deals.where(permanent: true).size %> Permanent Deals </br>
+            <% else %>
+                0 Permanent Deals </br>
+            <% end %>           
           </p>
 
 <!--         <td><% link_to 'Show', establishment %></td>

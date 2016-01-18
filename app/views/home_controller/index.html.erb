@@ -1,0 +1,87 @@
+<style>
+
+#wrapper {
+	border: 1px solid green;
+}
+
+.sidebar-nav {
+	border: 1px solid orange;
+}
+
+#sidebar-wrapper {
+	border: 1px solid yellow;
+	width: 250px;
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    /*width: 0;*/
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: white;
+/*    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;*/
+}
+
+#page-content-wrapper {
+    width: 100%;
+    left: 250px;
+    position: absolute;
+    padding: 15px;
+}
+
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+</style>
+
+<h1>HomeController#index</h1>
+
+<div id="wrapper">
+	<div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <% if @user_establishments %>
+            	<% @user_establishments.each do |establishment| %>
+            		<li>
+            			<%= link_to establishment.name, establishment %>
+            		</li>
+            		<p>
+			           <%= establishment.address %>
+			           <%= establishment.city %>
+			           <%= establishment.state %> </br>
+			           <% if establishment.deals.where(current: true).size > 0 %>
+				           <%= establishment.deals.where(current: true).size %> Current Deals </br>
+				       <% else %>
+				       	  0 Current Deals </br>
+				       <% end %>
+			           <% if establishment.deals.where(permanent: true).size > 0 %>
+				           <%= establishment.deals.where(permanent: true).size %> Permanent Deals </br>
+			       	   <% else %>
+			       	   	  0 Permanent Deals </br>
+			       	   <% end %>
+			       </p>
+            	<% end %>
+            <% else %>
+                <li> You have no establishments </li>
+            <% end %>
+        </ul>
+	</div>
+</div>
+<div id="page-content-wrapper">
+	<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Simple Sidebar</h1>
+                <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+            </div>
+        </div>
+    </div>
+</div>

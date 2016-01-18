@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   
-  root to: "deals#index"
+  get 'home_controller/index'
+
+  # root to: "deals#index"
+  root to: "home_controller#index"
   resources :establishments
   resources :users
   resources :deals

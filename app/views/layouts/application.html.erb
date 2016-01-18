@@ -19,11 +19,15 @@
         <li class=""><a href="/deals">Deals</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <!-- if currentuser.establishments -->
+          <li><a href="/">Home</a></li>
 
+          <li><a href="/establishments">Your Establishments</a></li>
+        <!-- end -->
       </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
-
+  
 <%= yield %>
 
 </body>

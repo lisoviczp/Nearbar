@@ -27,7 +27,7 @@ class EstablishmentsController < ApplicationController
     type = params[:type]
     @establishment=Establishment.find(params[:id])
     @current_user=User.first
-    if type == "favorite"
+    if type == "favorite" and ! @current_user.favorites.include? @establishment
       # pry
       # @current_user=User.first
       @current_user.favorites << @establishment
@@ -73,6 +73,6 @@ class EstablishmentsController < ApplicationController
     end
 
     def establishment_params
-      params.require(:establishment).permit(:name, :address, :city, :state, :zipcode, :email, :key, deals: [])
+      params.require(:establishment).permit(:name, :address, :city, :state, :zipcode, :email, :key, :user_id, deals: [])
     end
 end

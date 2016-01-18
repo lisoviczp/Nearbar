@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112052624) do
+ActiveRecord::Schema.define(version: 20160118181607) do
 
   create_table "deals", force: true do |t|
     t.string   "keyword"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20160112052624) do
     t.string   "key"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "favorite_establishments", force: true do |t|
