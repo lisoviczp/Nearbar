@@ -4,20 +4,21 @@
 <div class="my-table-container">
   <% @establishments.each do |establishment| %>
     <div class="featurette">
-        <h3 class="featurette-heading" style="color:red;"> <%= link_to establishment.name, establishment %></h3>
-        <div class="field">
-          <p>
-           <%= establishment.key %>
-          </p>
+        <h3 class="featurette-heading" style="color:red;"> 
+          <span id="bold-large-link"><%= link_to establishment.name, establishment %></span></h3>
           <p>
            <%= establishment.address %>
            <%= establishment.city %>
            <%= establishment.state %>
            <%= establishment.zipcode %> </br>
-           <%= establishment.email %> </br>
+          </p> </br>
+        <div class="field">
+          <p>
+           <%= establishment.key %>
           </p>
+          <p> <%= link_to "unfavorite",   favorite_establishment_path(establishment, type: "unfavorite"), method: :put %> </p>
 
-<!--         <td><% link_to 'Show', establishment %></td>
+<!--     
         <td><% link_to 'Edit', edit_establishment_path(establishment) %></td>
         <td><% link_to 'Destroy', establishment, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
         </div>

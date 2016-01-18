@@ -9,13 +9,6 @@
     = simple_form_for(@user, html: { class: 'form-horizontal' }) do |form| -->
 <style>
 
-.featurette {
-  /*border: 2px solid gray;*/
-}
-
-.featurette-heading {
-  /*border: 1px solid black;*/
-}
 
 </style>
 
@@ -28,10 +21,12 @@
 <div class="my-table-container">
   <% @deals.each do |deal| %>
     <div class="featurette">
-        <h3 class="featurette-heading" style="color:red;"> <%= deal.keyword %></h3>
+        <h3 class="featurette-heading" style=""> 
+          <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
+          <span id="footnote-text"> (<%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span></h3>
         <div class="field">
           <% if deal.establishment %>
-            <p> where: <%= deal.establishment.name %> </p>
+            <p> by <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span></p>
           <% end %>
           <%= deal.description %>
           <% if deal.current %>
@@ -39,8 +34,7 @@
           <% elsif deal.permanent %>
             <p> every week! </p>
           <% end %>
-          <p><%= link_to 'show me more', deal %></br>
-          <%= link_to 'edit', edit_deal_path(deal) %></p>
+          <!-- <%= link_to 'edit', edit_deal_path(deal) %></p> -->
           <!-- <td><% link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
         </div>
         <hr class="featurette-divider"/>

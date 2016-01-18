@@ -14,6 +14,15 @@
  *= require_self
  */
 
+ h1 {
+  color:#3aa5dc;
+ }
+
+
+ h2 {
+  color:#3aa5dc;
+ }
+
 .new-form {
 	width: 40%;
 	/*text-align: center;*/
@@ -152,6 +161,41 @@
   font-size: 1.5em;
   display: inline;
   font-weight: 100;
+}
+
+li {
+    list-style-type: none;
+}
+
+
+#bold-link a {
+    color:#00a0af;
+}
+
+#bold-link a:hover {
+    color:#00a0af;
+    background-color: white;
+    text-decoration: none;
+}
+
+#bold-large-link, #bold-large-link a{
+    color: #3aa5dc;
+    /*font-size: 2em;*/
+}
+
+#bold-large-link a:hover {
+    color: #3aa5dc;
+    background-color: white;
+    text-decoration: none;
+}
+
+#footnote-text {
+  font-size: 0.5em;
+}
+
+
+.testing {
+  border: 2px solid green;
 }
 /*a {
   color: green;

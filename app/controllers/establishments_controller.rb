@@ -39,7 +39,7 @@ class EstablishmentsController < ApplicationController
 
     else
       # Type missing, nothing happens
-      redirect_to :back, notice: 'Nothing happened.'
+      redirect_to :back, notice: "You've already favorited #{@establishment.name}."
     end
   end
 

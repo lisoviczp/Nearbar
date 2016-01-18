@@ -5,28 +5,49 @@
 <div class="new-wider-form">
     <div class="featurette">
       <div class="field">
-		<% if @deal.establishment %> 
-		<p style="display:inline;">
-		   where? 
-		   <div id="details"> <%= link_to @deal.establishment.name, establishment_path(@deal.establishment) %> </div>
+		<h3 style="display:inline;">
+		  <div id="details"> 
+		  	<span id="bold-large-link"><%= @deal.keyword %> </span> 
+		  	<span id="footnote-text">(<%= @deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
+		  </div>
+		  <hr>
+		</h3>
+		<p style="display:inline;"> 
+		   <div id="details"> <span id="bold-link"> <%= link_to @deal.establishment.name, establishment_path(@deal.establishment) %> </span></div>
 		</p>
-	   <% end %>
-		<p style="display:inline;">
-		  what is it?
-		  <div id="details"><%= @deal.keyword %></div>
+
+		<p>
+		 <%= @deal.establishment.address %> <%=@deal.establishment.city %> <%=@deal.establishment.zipcode %>
 		</p>
+
+		<hr>
+
 		<p style="display:inline;">
-		  details?
 		  <div id="details"><%= @deal.description %></div>
 		</p>
-		<p style="display:inline;">
-		  temporary?
-		  <div id="details"><%= @deal.current %></div>
-		</p>
-		<p style="display:inline;">
-		  permanent?
-		  <div id="details"><%= @deal.permanent %> </div>
-		</p>
+
+		<% if @deal.permanent %>
+			<p> This is a permanent deal at this location!</p>
+		<% elsif @deal.current %>
+			<p> This is a temporary special! Get here now!</p>
+		<% else %>
+			<p> This deal is currently not offered. </p>
+		<% end %>
+
+		
+		<div class="testing" style="display:none;"> 
+			(For Testing) </br>
+			<p style="display:inline;">
+			  temporary?
+			  <div id="details"><%= @deal.current %></div>
+			</p>
+
+			<p style="display:inline;">
+			  permanent?
+			  <div id="details"><%= @deal.permanent %> </div>
+			</p>
+		</div>
+
 	  </div>
 	  <%= link_to 'Edit', edit_deal_path(@deal) %> |
 	  <%= link_to 'Back', deals_path %>

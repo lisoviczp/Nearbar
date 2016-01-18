@@ -1,25 +1,26 @@
 <p id="notice"><%= notice %></p>
 
 
+<!-- Showing the Establishment details -->
 <div class="new-form">
     <div class="featurette">
-      <h2 class="featurette-heading" style="color:red;"><%= @establishment.name %></h2>
+      <h2 class="featurette-heading" style="">
+        <span id="bold-large-link"><%= @establishment.name %></span></h2>
+          <%= @establishment.address %>
+          <%= @establishment.city %>
+          <%= @establishment.state %>
+          <%= @establishment.zipcode %> </br></br>
       <div class="field">
         <p>
           <strong>Keywords:</strong>
           <%= @establishment.key %>
         </p>
+
         <p>
-          <%= @establishment.email %>
-        </p>
-        <p>
-          <%= @establishment.address %>
-          <%= @establishment.city %>
-          <%= @establishment.state %>
-          <%= @establishment.zipcode %> </br>
           <%= link_to "favorite",   favorite_establishment_path(@establishment, type: "favorite"), method: :put %> </br>
-<%= link_to "unfavorite",   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %> </
+          <%= link_to "unfavorite",   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
         </p>
+        
       </div>
     <%= link_to 'Edit', edit_establishment_path(@establishment) %> |
     <%= link_to 'Back', establishments_path %>
@@ -27,40 +28,49 @@
 </div>  
 
 
+<!-- Showing all current deals -->
 <div class="left-form-container">
     <div class="featurette">
       <% if @current_deals.length > 0 %>
         <h2 class="featurette-heading" style="color:red;">these are the current deals</h2>
+        <hr>
       <% else %>
         <h2 class="featurette-heading" style="color:red;">There are no current deals available</h2>
       <% end %>
       <div class="field">
-        <% @current_deals.reverse.each do |deal| %>
-          <%= link_to 'View Deal', deal_path(deal) %> </br>
-          <%= deal.keyword %>
-          <% deal.description %> </br>
+        <% @current_deals.each do |deal| %>
+          <h4> 
+            <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
+            <span id="footnote-text"><%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p") %> </span>
+          </h4>
+          by <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %> </span>
+            <%= deal.description %> </br>
           <!-- updated at: <% deal.updated_at.to_formatted_s(:long)%> -->
-          Updated at: <%= deal.updated_at.strftime("%b %d, %Y at %I:%M%p") %>
           <hr>
         <% end %>
       </div>
     </div>
 </div>
 
+
+<!-- Showing all permanent deals -->
 <div class="right-form-container">
     <div class="featurette">
       <% if @permanent_deals.length > 0 %>
         <h2 class="featurette-heading" style="color:red;">these are the permanent deals</h2>
+        <hr>
       <% else %>
         <h2 class="featurette-heading" style="color:red;">There are no permanent deals available</h2>
       <% end %>
       <div class="field">
-        <% @permanent_deals.reverse.each do |deal| %>
-          <%= link_to 'View Deal', deal_path(deal) %> </br>
-          <%= deal.keyword %>
-          <% deal.description %>  </br>
-          Updated at: <%= deal.updated_at.strftime("%b %d, %Y at %I:%M%p") %>
-
+        <% @permanent_deals.each do |deal| %>
+          <h4> 
+            <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
+            <span id="footnote-text"><%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p") %> </span>
+          </h4>
+          by <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %> </span>
+            <%= deal.description %> </br>
+          <!-- updated at: <% deal.updated_at.to_formatted_s(:long)%> -->
           <hr>
         <% end %>
       </div>

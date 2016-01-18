@@ -39,17 +39,21 @@
     margin-left: auto;
 }
 
+#sidebar-header {
+    font-family: helvetica;
+    font-size: 1.5em;
+}
 </style>
 
-<h1>HomeController#index</h1>
-
+<!-- This is the SideBar, where we will show the User's etablishments and/or Favorited establishments -->
 <div id="wrapper">
 	<div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <% if @user_establishments %>
+                <h4 id="sidebar-header"> Your Establishments </h4>
             	<% @user_establishments.each do |establishment| %>
             		<li>
-            			<%= link_to establishment.name, establishment %>
+            			<span id="bold-link"> <%= link_to establishment.name, establishment %> </span>
             		</li>
             		<p>
 			           <%= establishment.address %>
@@ -65,22 +69,68 @@
 			       	   <% else %>
 			       	   	  0 Permanent Deals </br>
 			       	   <% end %>
+                        <hr>
 			       </p>
             	<% end %>
+            <% end %>
+            <% if @favorite_establishments %>
+                <h4 id="sidebar-header"> Favorite Establishments </h4>
+                <% @favorite_establishments.each do |establishment| %>
+                    <li>
+                        <span id="bold-link"><%= link_to establishment.name, establishment %></span>
+                    </li>
+                    <p>
+                       <%= establishment.address %>
+                       <%= establishment.city %>
+                       <%= establishment.state %> </br>
+                       <% if establishment.deals.where(current: true).size > 0 %>
+                           <%= establishment.deals.where(current: true).size %> Current Deals </br>
+                       <% else %>
+                          0 Current Deals </br>
+                       <% end %>
+                       <% if establishment.deals.where(permanent: true).size > 0 %>
+                           <%= establishment.deals.where(permanent: true).size %> Permanent Deals </br>
+                       <% else %>
+                          0 Permanent Deals </br>
+                       <% end %>
+                        <hr>
+                   </p>
+                <% end %>
             <% else %>
-                <li> You have no establishments </li>
+                    <li> You have no establishments </li>
             <% end %>
         </ul>
 	</div>
 </div>
+
+<!-- This is where all the Deals will be listed -->
 <div id="page-content-wrapper">
 	<div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Simple Sidebar</h1>
-                <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <!-- <h1>Simple Sidebar</h1> -->
+                <div class="homepage-table-container">
+                  <% @deals.each do |deal| %>
+                    <div class="featurette">
+                        <h3 class="featurette-heading"> 
+                          <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
+                          <span id="footnote-text"> (<%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
+                        </h3>
+                        <div class="field">
+                          <% if deal.establishment %>
+                            <p> by <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %></span> </p>
+                          <% end %>
+                          <%= deal.description %>
+                          <% if deal.current %>
+                            <p>limited time only </p>
+                          <% elsif deal.permanent %>
+                            <p> every week! </p>
+                          <% end %>
+                        </div>
+                        <hr class="featurette-divider"/>
+                    </div>
+                  <% end %>
+                </div>
             </div>
         </div>
     </div>
