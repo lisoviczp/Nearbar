@@ -50,6 +50,11 @@ class EstablishmentsController < ApplicationController
     respond_with(@establishments)
   end
 
+  def your_establishments
+    @current_user = User.first
+    @establishments = Establishment.where(user_id: @current_user)
+  end
+
 
   def create
     @establishment = Establishment.new(establishment_params)

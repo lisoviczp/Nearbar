@@ -1,20 +1,9 @@
-  <!-- Le styles -->
-<!--   <link href="../assets/css/bootstrap.css" rel="stylesheet">
-  <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
-
-
-<!--   Inside your views, use the 'simple_form_for' with one of the Bootstrap form
-  classes, '.form-horizontal' or '.form-inline', as the following:
-
-    = simple_form_for(@user, html: { class: 'form-horizontal' }) do |form| -->
-
-<h2 id="center-text">Listing deals  </h2>
-<h2 id="center-text"> <%= link_to 'New Deal', new_deal_path %> </h2>
+<h2 class="featurette-heading" id="center-text" style="color:red;">Your Favorite Deals </h2>
 
 <div class="my-table-container">
   <% @deals.each do |deal| %>
     <div class="featurette">
-        <h3 class="featurette-heading" style=""> 
+        <h3 class="featurette-heading" style="color:red;"> 
           <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
           <span id="footnote-text"> (<%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span></h3>
         <div class="field">
@@ -27,8 +16,11 @@
           <% elsif deal.permanent %>
             <p> every week! </p>
           <% end %>
-          <!-- <%= link_to 'edit', edit_deal_path(deal) %></p> -->
-          <!-- <td><% link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+          <p> <%= link_to "unfavorite",   favorite_deal_path(deal, type: "unfavorite"), method: :put %> </p>
+
+<!--     
+        <td><% link_to 'Edit', edit_deal_path(deal) %></td>
+        <td><% link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
         </div>
         <hr class="featurette-divider"/>
     </div>
@@ -37,5 +29,3 @@
 
 
 <br>
-
-

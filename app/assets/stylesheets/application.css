@@ -197,6 +197,14 @@ li {
 .testing {
   border: 2px solid green;
 }
+
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;    
+}
+
+ul.dropdown-menu {
+  z-index: 2000;
+}
 /*a {
   color: green;
 }*/

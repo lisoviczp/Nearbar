@@ -20,6 +20,32 @@ class DealsController < ApplicationController
   def edit
   end
 
+  def favorite
+    type = params[:type]
+    @deal=Deal.find(params[:id])
+    @current_user=User.first
+    if type == "favorite" and ! @current_user.favorited_deals.include? @deal
+      # pry
+      # @current_user=User.first
+      @current_user.favorited_deals << @deal
+      redirect_to :back, notice: "You favorited #{@deal.keyword}"
+
+    elsif type == "unfavorite"
+      @current_user.favorited_deals.delete(@deal)
+      redirect_to :back, notice: "Unfavorited #{@deal.keyword}"
+
+    else
+      # Type missing, nothing happens
+      redirect_to :back, notice: "You've already favorited #{@deal.keyword}."
+    end
+  end
+
+  def favorite_deals_page
+    @current_user = User.first
+    @deals = @current_user.favorited_deals
+    respond_with(@deals)
+  end
+
   def create
     @deal = Deal.new(deal_params)
     @deal.save

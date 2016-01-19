@@ -1,0 +1,40 @@
+<h2 class="featurette-heading" id="center-text" style="">Listing All Your Establishments </h2>
+<h2 id="center-text" style=""> <%= link_to 'New', new_establishment_path %> </h2>
+
+<div class="my-table-container">
+  <% @establishments.each do |establishment| %>
+    <div class="featurette">
+        <h3 class="featurette-heading" style=""> <span id="bold-large-link"><%= link_to establishment.name, establishment %></span></h3>
+        <div class="field">
+          <p>
+           <%= establishment.key %>
+          </p>
+          <p>
+           <%= establishment.address %>
+           <%= establishment.city %>
+           <%= establishment.state %>
+           <%= establishment.zipcode %> </br>
+           <%= establishment.email %> </br>
+            <% if establishment.deals.where(current: true).size > 0 %>
+               <%= establishment.deals.where(current: true).size %> Current Deals </br>
+            <% else %>
+              0 Current Deals </br>
+            <% end %>
+            <% if establishment.deals.where(permanent: true).size > 0 %>
+               <%= establishment.deals.where(permanent: true).size %> Permanent Deals </br>
+            <% else %>
+                0 Permanent Deals </br>
+            <% end %>           
+          </p>
+
+<!--         <td><% link_to 'Show', establishment %></td>
+        <td><% link_to 'Edit', edit_establishment_path(establishment) %></td>
+        <td><% link_to 'Destroy', establishment, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+        </div>
+        <hr class="featurette-divider"/>
+    </div>
+  <% end %>
+</div>
+
+
+<br>

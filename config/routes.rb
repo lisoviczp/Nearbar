@@ -12,8 +12,20 @@ Rails.application.routes.draw do
     put :favorite, on: :member
   end
 
+  # config/routes.rb
+  resources :deals do
+    put :favorite, on: :member
+  end
 
+  # Favorites route for showing the current user's establishments
+  get '/your_establishments', to: 'establishments#your_establishments', as: :your_establishments
+
+  # Favorites route for favoriting establishments
   get '/favorites', to: 'establishments#favorites_page', as: :favorites_page
+
+  # Favorites route for favoriting deals
+  get '/favorite_deals', to: 'deals#favorite_deals_page', as: :favorite_deals_page
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

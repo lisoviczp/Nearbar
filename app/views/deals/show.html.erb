@@ -10,6 +10,10 @@
 		  	<span id="bold-large-link"><%= @deal.keyword %> </span> 
 		  	<span id="footnote-text">(<%= @deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
 		  </div>
+	        <p>
+	          <%= link_to "favorite",   favorite_deal_path(@deal, type: "favorite"), method: :put %> </br>
+	          <%= link_to "unfavorite",   favorite_deal_path(@deal, type: "unfavorite"), method: :put %>
+	        </p>
 		  <hr>
 		</h3>
 		<p style="display:inline;"> 
