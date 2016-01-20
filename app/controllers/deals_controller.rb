@@ -4,11 +4,19 @@ class DealsController < ApplicationController
   respond_to :html
 
   def index
-    @deals = Deal.all
-    respond_with(@deals)
+    # @deals = Deal.all
+    # respond_with(@deals)
+    if params[:search]
+      @deals = Deal.search(params[:search])
+    else
+      @deals = Deal.all
+    end
+    @current_user = User.first
+
   end
 
   def show
+    @current_user = User.first
     respond_with(@deal)
   end
 
@@ -68,6 +76,6 @@ class DealsController < ApplicationController
     end
 
     def deal_params
-      params.require(:deal).permit(:keyword, :description, :current, :permanent, :establishment_id)
+      params.require(:deal).permit(:keyword, :description, :current, :permanent, :establishment_id, :active)
     end
 end

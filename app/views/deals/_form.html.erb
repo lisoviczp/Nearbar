@@ -1,7 +1,7 @@
 <!-- = simple_form_for(@user, html: { class: 'form-horizontal' }) do |form| -->
 
 <div class="new-form">
-  <h1> what's going on </h1>
+  <h1 id="center-text"> what's going on </h1>
   <%= simple_form_for(@deal, html: { class: 'form-horizontal' }) do |f| %>
     <% if @deal.errors.any? %>
       <div id="error_explanation">
@@ -28,12 +28,21 @@
 
     <div class="featurette">
       <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
-      <h2 class="featurette-heading" style="color:red;">Current? Permanent?</h2>
+      <h2 class="featurette-heading" style="color:red;">Deal Status</h2>
       <div class="field">
-        <%= f.label :current %>
+        <%= f.label "Click here if this is a temporary deal" %>
         <%= f.check_box :current %></br>
-        <%= f.label :permanent %>
+        <%= f.label "Click here if this is an ongoing special" %>
         <%= f.check_box :permanent %></br>
+      </div>
+    </div>
+
+    <div class="featurette">
+      <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
+      <h2 class="featurette-heading" style="color:red;">Active?</h2>
+      <div class="field">
+        <%= f.label "Click here if you want all users to see this deal" %>
+        <%= f.check_box :active %></br>
       </div>
     </div>
 
@@ -45,7 +54,7 @@
       </div>
     </div>
 
-    <div class="actions">
+    <div class="actions" id="center-text">
       <%= f.submit %>
     </div>
   <% end %>

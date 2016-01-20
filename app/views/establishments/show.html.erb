@@ -4,23 +4,37 @@
 <!-- Showing the Establishment details -->
 <div class="new-form">
     <div class="featurette">
+      
       <h2 class="featurette-heading" style="">
-        <span id="bold-large-link"><%= @establishment.name %></span></h2>
+        <span id="bold-large-link"><%= @establishment.name %></span>
+          <% if @current_user.favorites.include? @establishment %> 
+            <span id="bold-large-link-glyph">
+              <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
+                <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+              </a>
+            </span>
+          <% else %>
+            <span id="bold-large-link-glyph">
+              <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "favorite"), method: :put, style: 'color:grey;' %>
+                <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+              </a>
+            </span>
+          <% end %>
+      </h2>
+
           <%= @establishment.address %>
           <%= @establishment.city %>
           <%= @establishment.state %>
           <%= @establishment.zipcode %> </br></br>
+          
       <div class="field">
         <p>
           <strong>Keywords:</strong>
           <%= @establishment.key %>
         </p>
 
-        <p>
-          <%= link_to "favorite",   favorite_establishment_path(@establishment, type: "favorite"), method: :put %> </br>
-          <%= link_to "unfavorite",   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
-        </p>
-        
+        <%= @establishment.total_active_deals %> active deals </br>
+
       </div>
     <%= link_to 'Edit', edit_establishment_path(@establishment) %> |
     <%= link_to 'Back', establishments_path %>
@@ -44,8 +58,10 @@
             <span id="footnote-text"><%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p") %> </span>
           </h4>
           by <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %> </span>
-            <%= deal.description %> </br>
+          </br>
+          <%= deal.description %> </br>
           <!-- updated at: <% deal.updated_at.to_formatted_s(:long)%> -->
+          Favorited by <%= deal.get_likes %> users
           <hr>
         <% end %>
       </div>
@@ -69,8 +85,10 @@
             <span id="footnote-text"><%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p") %> </span>
           </h4>
           by <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %> </span>
-            <%= deal.description %> </br>
+          </br>
+          <%= deal.description %> </br>
           <!-- updated at: <% deal.updated_at.to_formatted_s(:long)%> -->
+          Favorited by <%= deal.get_likes %> users
           <hr>
         <% end %>
       </div>

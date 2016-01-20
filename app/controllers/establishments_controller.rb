@@ -4,13 +4,21 @@ class EstablishmentsController < ApplicationController
   respond_to :html
 
   def index
-    @establishments = Establishment.all
-    respond_with(@establishments)
+    # @establishments = Establishment.all
+    # respond_with(@establishments)
+    if params[:search]
+      @establishments = Establishment.search(params[:search])
+    else
+      @establishments = Establishment.all
+    end
+    @current_user=User.first
   end
 
   def show
     @current_deals = Deal.all.where(establishment_id: @establishment, current: true)
     @permanent_deals = Deal.all.where(establishment_id: @establishment, permanent: true)
+    @current_user=User.first
+    
     # pry
     respond_with(@establishment)
   end

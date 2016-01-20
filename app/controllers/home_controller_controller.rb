@@ -7,7 +7,8 @@ class HomeControllerController < ApplicationController
   	if @current_user.establishments
   		@user_establishments = @current_user.establishments
   	end
-	@deals=Deal.all.order('updated_at DESC')
+    
+  	@deals=Deal.all.order('updated_at DESC')
     @favorite_establishments = @current_user.favorites
   	
   end

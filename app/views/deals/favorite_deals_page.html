@@ -1,14 +1,34 @@
+<p id="notice"><%= notice %></p>
+
 <h2 class="featurette-heading" id="center-text" style="color:red;">Your Favorite Deals </h2>
 
 <div class="my-table-container">
   <% @deals.each do |deal| %>
     <div class="featurette">
         <h3 class="featurette-heading" style="color:red;"> 
+
           <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-          <span id="footnote-text"> (<%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span></h3>
+            <% if @current_user.favorited_deals.include? deal %> 
+              <span id="bold-large-link-glyph">
+                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
+                  <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+                </a>
+              </span>
+            <% else %>
+              <span id="bold-large-link-glyph">
+                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "favorite"), method: :put, style: 'color:grey;' %>
+                  <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+                </a>
+              </span>
+            <% end %>
+        </h3>
+
         <div class="field">
           <% if deal.establishment %>
-            <p> by <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span></p>
+            <p> by 
+              <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span>
+              <span id="footnote-text"> (<%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
+            </p>
           <% end %>
           <%= deal.description %>
           <% if deal.current %>
@@ -16,16 +36,11 @@
           <% elsif deal.permanent %>
             <p> every week! </p>
           <% end %>
-          <p> <%= link_to "unfavorite",   favorite_deal_path(deal, type: "unfavorite"), method: :put %> </p>
-
-<!--     
-        <td><% link_to 'Edit', edit_deal_path(deal) %></td>
+  <!--  <td><% link_to 'Edit', edit_deal_path(deal) %></td>
         <td><% link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
         </div>
+
         <hr class="featurette-divider"/>
     </div>
   <% end %>
 </div>
-
-
-<br>

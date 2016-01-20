@@ -81,7 +81,7 @@
 	border: 2px solid orange;
 
 	margin-left: 5%;
-	margin-top: 7.5em;
+	margin-top: 2.5em;
 	margin-bottom: 20em;
 	padding-top: 1em;
 	padding-left: 3em;
@@ -178,7 +178,7 @@ li {
     text-decoration: none;
 }
 
-#bold-large-link, #bold-large-link a{
+#bold-large-link, #bold-large-link a {
     color: #3aa5dc;
     /*font-size: 2em;*/
 }
@@ -189,8 +189,14 @@ li {
     text-decoration: none;
 }
 
+#bold-large-link-glyph, #bold-large-link-glyph a {
+    color: #3aa5dc;
+    padding-left: 2px;
+    background-color: white;
+}
+
 #footnote-text {
-  font-size: 0.5em;
+  font-size: 0.65em;
 }
 
 
@@ -204,6 +210,11 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 
 ul.dropdown-menu {
   z-index: 2000;
+}
+
+#notice {
+  font-family: helvetica;
+  padding:3px;
 }
 /*a {
   color: green;

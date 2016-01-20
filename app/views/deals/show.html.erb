@@ -7,17 +7,32 @@
       <div class="field">
 		<h3 style="display:inline;">
 		  <div id="details"> 
-		  	<span id="bold-large-link"><%= @deal.keyword %> </span> 
-		  	<span id="footnote-text">(<%= @deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
+		  	<span id="bold-large-link"><%= @deal.keyword %> </span>
+	            <% if @current_user.favorited_deals.include? @deal %> 
+	              <span id="bold-large-link-glyph">
+	                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(@deal, type: "unfavorite"), method: :put %>
+	                </a>
+	              </span>
+	            <% else %>
+	              <span id="bold-large-link-glyph">
+	                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(@deal, type: "favorite"), method: :put, style: 'color:grey;' %>
+	                </a>
+	              </span>
+	            <% end %>
 		  </div>
-	        <p>
+		</br>
+<!-- 	        <p>
 	          <%= link_to "favorite",   favorite_deal_path(@deal, type: "favorite"), method: :put %> </br>
 	          <%= link_to "unfavorite",   favorite_deal_path(@deal, type: "unfavorite"), method: :put %>
-	        </p>
-		  <hr>
+	        </p> -->
 		</h3>
+		<span id="footnote-text">(<%= @deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
+
 		<p style="display:inline;"> 
-		   <div id="details"> <span id="bold-link"> <%= link_to @deal.establishment.name, establishment_path(@deal.establishment) %> </span></div>
+		</br> at
+		   <div id="details"> 
+		   	<span id="bold-link"> <%= link_to @deal.establishment.name, establishment_path(@deal.establishment) %> </span>
+		   </div>
 		</p>
 
 		<p>
@@ -30,13 +45,13 @@
 		  <div id="details"><%= @deal.description %></div>
 		</p>
 
-		<% if @deal.permanent %>
-			<p> This is a permanent deal at this location!</p>
-		<% elsif @deal.current %>
-			<p> This is a temporary special! Get here now!</p>
-		<% else %>
-			<p> This deal is currently not offered. </p>
-		<% end %>
+		<p>
+		  <% if @deal.current? %>
+			  <div style="color:green;"> This is a temporary deal only. Hurry over! </div>
+			<% elsif @deal.permanent? %>
+			  <div style="color:black;"> This is permanently offered bc we love you </div>
+			<% end %>
+		</p>
 
 		
 		<div class="testing" style="display:none;"> 
@@ -51,8 +66,13 @@
 			  <div id="details"><%= @deal.permanent %> </div>
 			</p>
 		</div>
-
 	  </div>
+
+	  Favorited by <%= @deal.get_likes %> users </br>
+	  </br>
+	  </br>
+	  
+	  <hr>
 	  <%= link_to 'Edit', edit_deal_path(@deal) %> |
 	  <%= link_to 'Back', deals_path %>
 	</div>
