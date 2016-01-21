@@ -46,9 +46,9 @@
 		</p>
 
 		<p>
-		  <% if @deal.current? %>
+		  <% if @deal.temporary? %>
 			  <div style="color:green;"> This is a temporary deal only. Hurry over! </div>
-			<% elsif @deal.permanent? %>
+			<% else %>
 			  <div style="color:black;"> This is permanently offered bc we love you </div>
 			<% end %>
 		</p>
@@ -58,7 +58,7 @@
 			(For Testing) </br>
 			<p style="display:inline;">
 			  temporary?
-			  <div id="details"><%= @deal.current %></div>
+			  <div id="details"><%= @deal.temporary %></div>
 			</p>
 
 			<p style="display:inline;">
@@ -66,6 +66,7 @@
 			  <div id="details"><%= @deal.permanent %> </div>
 			</p>
 		</div>
+		
 	  </div>
 
 	  Favorited by <%= @deal.get_likes %> users </br>

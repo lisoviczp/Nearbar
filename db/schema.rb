@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120051229) do
+ActiveRecord::Schema.define(version: 20160121032541) do
 
   create_table "deals", force: true do |t|
     t.string   "keyword"
     t.text     "description"
-    t.boolean  "current"
+    t.boolean  "temporary"
     t.boolean  "permanent"
     t.datetime "created_at"
     t.datetime "updated_at"

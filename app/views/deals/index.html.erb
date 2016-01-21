@@ -19,27 +19,31 @@
 
 
 <div class="my-table-container">
+  <!-- <h1 id="details">Listing all Deals</h1> -->
   <% @deals.each do |deal| %>
     <div class="featurette">
 
-        <h3 class="featurette-heading" style=""> 
-          <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-            <% if @current_user.favorited_deals.include? deal %> 
-              <span id="bold-large-link-glyph">
-                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
-                  <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
-                </a>
-              </span>
-            <% else %>
-              <span id="bold-large-link-glyph">
-                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "favorite"), method: :put, style: 'color:grey;' %>
-                  <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
-                </a>
-              </span>
-            <% end %>
+        <h3 style=""> 
+          <div id="details">
+            <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
+              <% if @current_user.favorited_deals.include? deal %> 
+                <span id="bold-large-link-glyph">
+                  <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
+                    <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+                  </a>
+                </span>
+              <% else %>
+                <span id="bold-large-link-glyph">
+                  <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "favorite"), method: :put, style: 'color:grey;' %>
+                    <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+                  </a>
+                </span>
+              <% end %>
+            </div>
         </h3>
         
-        <div class="field">
+        
+        <div class="details">
           <% if deal.establishment %>
             <p> by 
               <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span>
@@ -49,9 +53,9 @@
           <%= deal.description %>
 
           <p>
-          <% if deal.current? %>
+          <% if deal.temporary? %>
             <div style="color:green;"> This is a temporary deal only. Hurry over! </div>
-          <% elsif deal.permanent? %>
+          <% else %>
             <div style="color:black;"> This is permanently offered bc we love you </div>
           <% end %>
           </p>

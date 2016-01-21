@@ -9,7 +9,7 @@ class DealsController < ApplicationController
     if params[:search]
       @deals = Deal.search(params[:search])
     else
-      @deals = Deal.all
+      @deals = Deal.all.where(active: true)
     end
     @current_user = User.first
 
@@ -76,6 +76,6 @@ class DealsController < ApplicationController
     end
 
     def deal_params
-      params.require(:deal).permit(:keyword, :description, :current, :permanent, :establishment_id, :active)
+      params.require(:deal).permit(:keyword, :description, :temporary, :permanent, :establishment_id, :active)
     end
 end

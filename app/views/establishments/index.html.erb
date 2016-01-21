@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <div id="center-text">
   <h2 id="bold-large-link"> 
     <%= link_to ('New Establishment <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, new_establishment_path %>
@@ -23,13 +25,11 @@
             <span id="bold-large-link-glyph">
               <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(establishment, type: "unfavorite"), method: :put %>
                 <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
-              </a>
             </span>
           <% else %>
             <span id="bold-large-link-glyph">
               <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(establishment, type: "favorite"), method: :put, style: 'color:grey;' %>
                 <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
-              </a>
             </span>
           <% end %>
         </h3>
@@ -43,17 +43,7 @@
            <%= establishment.city %>
            <%= establishment.state %>
            <%= establishment.zipcode %> </br>
-           <%= establishment.email %> </br>
-            <% if establishment.deals.where(current: true).size > 0 %>
-               <%= establishment.deals.where(current: true).size %> Current Deals </br>
-            <% else %>
-              0 Current Deals </br>
-            <% end %>
-            <% if establishment.deals.where(permanent: true).size > 0 %>
-               <%= establishment.deals.where(permanent: true).size %> Permanent Deals </br>
-            <% else %>
-                0 Permanent Deals </br>
-            <% end %>           
+           <%= establishment.total_active_deals %> active deals </br>      
           </p>
 
 <!--         <td><% link_to 'Show', establishment %></td>

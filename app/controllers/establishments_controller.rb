@@ -15,8 +15,9 @@ class EstablishmentsController < ApplicationController
   end
 
   def show
-    @current_deals = Deal.all.where(establishment_id: @establishment, current: true)
-    @permanent_deals = Deal.all.where(establishment_id: @establishment, permanent: true)
+    # Only will show deals that are active
+    @current_deals = Deal.all.where(establishment_id: @establishment, temporary: true, active: true)
+    @permanent_deals = Deal.all.where(establishment_id: @establishment, temporary: false, active: true)
     @current_user=User.first
     
     # pry

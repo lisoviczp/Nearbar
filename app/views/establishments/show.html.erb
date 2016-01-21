@@ -46,10 +46,10 @@
 <div class="left-form-container">
     <div class="featurette">
       <% if @current_deals.length > 0 %>
-        <h2 class="featurette-heading" style="color:red;">these are the current deals</h2>
+        <h2 class="featurette-heading" style="color:red;">these are the temporary deals</h2>
         <hr>
       <% else %>
-        <h2 class="featurette-heading" style="color:red;">There are no current deals available</h2>
+        <h2 class="featurette-heading" style="color:red;">There are no temporary deals available</h2>
       <% end %>
       <div class="field">
         <% @current_deals.each do |deal| %>

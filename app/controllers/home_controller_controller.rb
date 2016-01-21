@@ -10,6 +10,7 @@ class HomeControllerController < ApplicationController
     
   	@deals=Deal.all.order('updated_at DESC')
     @favorite_establishments = @current_user.favorites
+    @favorite_deals = @current_user.favorited_deals
   	
   end
 end

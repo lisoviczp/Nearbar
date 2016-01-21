@@ -1,10 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<div id="center-text">
+  <h2 id="bold-large-link"> 
+    <%= link_to ('New Establishment <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, new_establishment_path %>
+  </h2>
+</div>
+
 <h2 class="featurette-heading" id="center-text" style="">Listing All Your Establishments </h2>
-<h2 id="center-text" style=""> <%= link_to 'New', new_establishment_path %> </h2>
+
+<%= form_tag establishments_path, :method => 'get' do %>
+  <p id="center-text">
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 
 <div class="my-table-container">
   <% @establishments.each do |establishment| %>
     <div class="featurette">
-        <h3 class="featurette-heading" style=""> <span id="bold-large-link"><%= link_to establishment.name, establishment %></span></h3>
+        <h3 class="featurette-heading" style=""> 
+          <span id="bold-large-link"><%= link_to establishment.name, establishment %></span>
+          <% if @current_user.favorites.include? establishment %> 
+            <span id="bold-large-link-glyph">
+              <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(establishment, type: "unfavorite"), method: :put %>
+                <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+            </span>
+          <% else %>
+            <span id="bold-large-link-glyph">
+              <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(establishment, type: "favorite"), method: :put, style: 'color:grey;' %>
+                <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+            </span>
+          <% end %>
+        </h3>
         <div class="field">
           <p>
            <%= establishment.key %>
@@ -15,16 +43,8 @@
            <%= establishment.state %>
            <%= establishment.zipcode %> </br>
            <%= establishment.email %> </br>
-            <% if establishment.deals.where(current: true).size > 0 %>
-               <%= establishment.deals.where(current: true).size %> Current Deals </br>
-            <% else %>
-              0 Current Deals </br>
-            <% end %>
-            <% if establishment.deals.where(permanent: true).size > 0 %>
-               <%= establishment.deals.where(permanent: true).size %> Permanent Deals </br>
-            <% else %>
-                0 Permanent Deals </br>
-            <% end %>           
+           <%= establishment.total_active_deals %> active deals </br>
+         
           </p>
 
 <!--         <td><% link_to 'Show', establishment %></td>
