@@ -2,7 +2,7 @@
 
 
 <!-- Showing the Establishment details -->
-<div class="new-form">
+<div class="show-establishment-box">
     <div class="featurette">
       
       <h2 class="featurette-heading" style="">
@@ -11,13 +11,11 @@
             <span id="bold-large-link-glyph">
               <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
                 <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
-              </a>
             </span>
           <% else %>
             <span id="bold-large-link-glyph">
               <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "favorite"), method: :put, style: 'color:grey;' %>
                 <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
-              </a>
             </span>
           <% end %>
       </h2>
@@ -32,6 +30,20 @@
           <strong>Keywords:</strong>
           <%= @establishment.key %>
         </p>
+      </div>
+
+      <h4>
+        <span id="bold-large-link-glyph">
+        <%= link_to ('<span style="" class="glyphicon glyphicon-phone" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
+        </span> Click to receive texts 
+      <h4> 
+
+      <h4>
+        <span id="bold-large-link-glyph">
+        <%= link_to ('<span style="" class="glyphicon glyphicon-envelope" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
+        </span> Click for weekly emails </br>
+      </h4>
+
 
         <%= @establishment.total_active_deals %> active deals </br>
 

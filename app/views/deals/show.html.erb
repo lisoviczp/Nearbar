@@ -31,12 +31,12 @@
 		<p style="display:inline;"> 
 		</br> at
 		   <div id="details"> 
-		   	<span id="bold-link"> <%= link_to @deal.establishment.name, establishment_path(@deal.establishment) %> </span>
+		   	<span id="bold-link"> <%= link_to @deal.establishment.name, establishment_path(@deal.establishment) if @deal.establishment %> </span>
 		   </div>
 		</p>
 
 		<p>
-		 <%= @deal.establishment.address %> <%=@deal.establishment.city %> <%=@deal.establishment.zipcode %>
+		 <%= @deal.establishment.address if @deal.establishment %> <%=@deal.establishment.city if @deal.establishment%> <%=@deal.establishment.zipcode if @deal.establishment %>
 		</p>
 
 		<hr>

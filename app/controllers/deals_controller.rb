@@ -61,6 +61,7 @@ class DealsController < ApplicationController
 
 
   def edit
+    @current_user = User.first
   end
 
   def favorite
@@ -102,12 +103,14 @@ class DealsController < ApplicationController
         puts each_user
         # send_text_message(each_user.phone_number, new_establishment, new_message)
       end
+    end
 
     respond_with(@deal)
   end
 
   def update
     @deal.update(deal_params)
+    @deal.save
     respond_with(@deal)
   end
 

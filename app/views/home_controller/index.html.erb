@@ -1,15 +1,24 @@
 <style>
 
 #wrapper, #right-sidebar-wrapper {
-  border: 1px solid green;
+  /*border: 1px solid green;*/
 }
 
 .sidebar-nav {
-  border: 1px solid orange;
+  /*border: 1px solid orange;*/
+  /*border-right: 1px solid gray;*/
+}
+
+#left-sidebar {
+  border-right: 1px solid gray;
+}
+
+hr {
+  width: 80%;
 }
 
 #sidebar-wrapper {
-  border: 1px solid yellow;
+  /*border: 1px solid yellow;*/
   width: 250px;
     z-index: 1000;
     position: fixed;
@@ -26,16 +35,18 @@
 }
 
 #right-sidebar-wrapper {
-  border: 1px solid yellow;
+  /*border: 1px solid yellow;*/
+  border: 1px solid gray;
   width: 350px;
   z-index: 1000;
   position: absolute;
   right: 350px;
   /*width: 0;*/
   height: 100%;
-  margin-right: -350px;
+  margin-right: -330px;
   overflow-y: auto;
   background: white;
+  padding-right: 2em;
 }
 
 #page-content-wrapper {
@@ -67,6 +78,7 @@
 <!-- This is the LEFT SideBar, where we will show the User's etablishments and/or Favorited establishments -->
 <div id="wrapper">
 	<div id="sidebar-wrapper">
+    <div id="left-sidebar">
         <ul class="sidebar-nav">
             <% if @user_establishments %>
                 <h4 id="sidebar-header"> Yours </h4>
@@ -101,7 +113,8 @@
                     <li> You have no establishments </li>
             <% end %>
         </ul>
-	</div>
+	 </div>
+  </div>
 </div>
 
 
@@ -114,6 +127,7 @@
       <div class="row">
           <div class="col-lg-12">
             <!-- <h1>Simple Sidebar</h1> -->
+
             <div class="homepage-table-container">
             <h1 id="details">Listing all Deals</h1>
 
