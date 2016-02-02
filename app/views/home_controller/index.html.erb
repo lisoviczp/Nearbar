@@ -1,10 +1,11 @@
 <style>
 
-
-
 </style>
 
 
+
+
+<p id="notice"><%= notice %></p>
 
 <!-- This is the LEFT SideBar, where we will show the User's etablishments and/or Favorited establishments -->
 <div id="wrapper">
@@ -86,21 +87,29 @@
                       <% if deal.establishment %>
                         <p> by 
                           <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %></span> 
+                          <span class="address-oneliner">
+                             <%= deal.establishment.address %>
+                             <%= deal.establishment.city %>
+                             <%= deal.establishment.state %>
+                             <%= deal.establishment.zipcode %> 
+                          </span> </br>
                           <span id="footnote-text"> (<%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
                         </p>
                       <% end %>
+
                       <%= deal.description %>
 
                       <p>
+                        Favorited by <%= deal.get_likes %> user(s) |
+
                         <% if deal.temporary? %>
-                          <div style="color:green;"> This is a temporary deal only. Hurry over! </div>
+                          <span style="color:green;"> This is a temporary deal only. Hurry over! </span>
                         <% else %>
-                          <div style="color:black;"> This is permanently offered bc we love you </div>
+                          <span style="color:black;"> This is permanently offered bc we love you </span>
                         <% end %>
                       </p>
                     </div>
 
-                    Favorited by <%= deal.get_likes %> users </br>
                     <hr class="featurette-divider"/>
                 </div>
               <% end %>

@@ -39,7 +39,7 @@
         <div id="small-text" style="display:inline;">
           Click to receive texts <span id="footnote-text">(You will be notified whenever deals are posted)</span>
         </div>
-      <h4> 
+      </h4> 
 
       <h4>
         <span id="bold-large-link-glyph">
@@ -58,9 +58,10 @@
 
         <% if @establishment.user == @current_user %>
           <span id="footnote-text"> 
-            <%= link_to 'Edit', edit_establishment_path(@establishment) %> |
-            <%= link_to 'Delete', @establishment, method: :delete, data: { confirm: 'Are you sure?' } %> | 
-            <%= link_to 'Back', establishments_path %> 
+            <%= link_to ('<span style="" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>').html_safe,establishments_path %> |
+            <%= link_to ('<span style="" class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, edit_establishment_path(@establishment) %> |
+            <%= link_to ('<span style="" class="glyphicon glyphicon-trash" aria-hidden="true"></span>').html_safe,@establishment, method: :delete, data: { confirm: 'Are you sure?' } %> 
+
           </span>
         <% else %>
           <span id="footnote-text">
@@ -70,10 +71,8 @@
       </div>
 
     </div>
+</div>
 
-
-  </div>
-</div>  
 
 
 <!-- Showing all current deals -->

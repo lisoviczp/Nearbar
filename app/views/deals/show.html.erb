@@ -72,10 +72,10 @@
 
 		  Favorited by <%= @deal.get_likes %> users </br>
 
-		  <% if @current_user.establishments.include? @deal.establishment  %>
-			  <%= link_to 'Edit', edit_deal_path(@deal) %> |
-	          <%= link_to 'Delete', @deal, method: :delete, data: { confirm: 'Are you sure?' } %> | 
-			  <%= link_to 'Back', deals_path %>
+		  <% if @current_user.establishments.include? @deal.establishment  %> 
+			  <%= link_to ('<span style="" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>').html_safe, deals_path %> | 
+			  <%= link_to ('<span style="" class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, edit_deal_path(@deal) %> |
+	          <%= link_to ('<span style="" class="glyphicon glyphicon-trash" aria-hidden="true"></span>').html_safe, @deal, method: :delete, data: { confirm: 'Are you sure?' } %> 
 		  <% end %>
 	  </div>
 </div>
