@@ -46,5 +46,9 @@ class Establishment < ActiveRecord::Base
 		@count
 	end
 
+	def total_users_favorited
+		# @current_user = User.first
+		@total_favorites = self.favorited_by.size
+	end
 
 end

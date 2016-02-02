@@ -15,6 +15,12 @@ class DealsController < ApplicationController
     end
     @current_user = User.first
 
+    @featured_deals = Deal.where(
+      'created_at >= :three_days_ago or updated_at >= :one_day_ago',
+      :three_days_ago  => Time.now - 3.days,
+      :one_day_ago => Time.now - 1.days
+    )
+
   end
 
   def show
@@ -23,6 +29,7 @@ class DealsController < ApplicationController
   end
 
   def new
+    @current_user = User.first
     @deal = Deal.new
     respond_with(@deal)
   end

@@ -1,5 +1,8 @@
 
-<div class="new-form">
+<h2 class="important-header" style="text-align:center;">Create Establishment</h2>
+
+<!-- restaurants, bars, clubs, coffee / tea -->
+<div class="show-establishment-box">
   <%= form_for(@establishment) do |f| %>
     <% if @establishment.errors.any? %>
       <div id="error_explanation">
@@ -14,47 +17,45 @@
     <% end %>
 
     <div class="featurette">
-      <h2 class="featurette-heading" style="color:red;">name</h2>
+      <h2 class="featurette-heading" style="color:red;">Name</h2>
       <div class="field">
-        <%= f.text_field :name %>
+        <%= f.text_field :name, placeholder: "Establishment Name" %>
       </div>
+      <h2 class="featurette-heading" style="color:red;">Keywords</h2>
       <div class="field">
-        <%= f.label :key %><br>
-        <%= f.text_field :key %>
+        <%= f.text_field :key, label: :none, placeholder: "What are your go-to's?" %>
       </div>
     </div>
 
     <div class="featurette">
       <h2 class="featurette-heading" style="color:red;">where are you</h2>
       <div class="field">
-      <%= f.label :address %><br>
-      <%= f.text_field :address %>
+      <%= f.text_field :address, placeholder: 'Address' %>
       </div>
       <div class="field">
-        <%= f.label :city %><br>
-        <%= f.text_field :city %>
+        <%= f.text_field :city, placeholder: 'City' %>
       </div>
       <div class="field">
-        <%= f.label :state %><br>
-        <%= f.text_field :state %>
+        <%= f.text_field :state, placeholder: 'State' %>
       </div>
       <div class="field">
-        <%= f.label :zipcode %><br>
-        <%= f.text_field :zipcode %>
+        <%= f.text_field :zipcode, placeholder: 'Zipcode' %>
       </div>
     </div>
 
     <div class="featurette">
       <h2 class="featurette-heading" style="color:red;">contact</h2>
       <div class="field">
-        <%= f.label :email %><br>
-        <%= f.text_field :email %>
+        <%= f.text_field :email, placeholder: 'Email' %>
       </div>
+    </div>
+
+    <div id="center-text">
       <div class="actions">
         <%= f.submit %>
       </div>
-      <%= link_to 'Back', establishments_path %>
-
+      <%link_to 'Back', establishments_path %>
     </div>
+
   <% end %>
 </div>

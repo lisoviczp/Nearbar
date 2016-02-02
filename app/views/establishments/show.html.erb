@@ -21,7 +21,7 @@
       </h2>
 
           <%= @establishment.address %>
-          <%= @establishment.city %>
+          <%= @establishment.city %>,
           <%= @establishment.state %>
           <%= @establishment.zipcode %> </br></br>
           
@@ -33,24 +33,46 @@
       </div>
 
       <h4>
-        <span id="bold-large-link-glyph">
+        <span id="bold-large-link-glyph" style="display:inline;">
         <%= link_to ('<span style="" class="glyphicon glyphicon-phone" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
-        </span> Click to receive texts 
+        </span> 
+        <div id="small-text" style="display:inline;">
+          Click to receive texts <span id="footnote-text">(You will be notified whenever deals are posted)</span>
+        </div>
       <h4> 
 
       <h4>
         <span id="bold-large-link-glyph">
         <%= link_to ('<span style="" class="glyphicon glyphicon-envelope" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
-        </span> Click for weekly emails </br>
+        </span> 
+        <div id="small-text" style="display:inline;">
+          Click for weekly emails <span id="footnote-text">(You will receive a weekly email detailing upcoming specials)</span>
+        </div> 
       </h4>
 
+      </br>
 
+      <div id="center-info">
         <%= @establishment.total_active_deals %> active deals </br>
+        Favorited by <%= @establishment.total_users_favorited %> user(s)   </br>
 
+        <% if @establishment.user == @current_user %>
+          <span id="footnote-text"> 
+            <%= link_to 'Edit', edit_establishment_path(@establishment) %> |
+            <%= link_to 'Delete', @establishment, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+            <%= link_to 'Back', establishments_path %> 
+          </span>
+        <% else %>
+          <span id="footnote-text">
+            <%= link_to 'Back', establishments_path %>
+          </span>
+        <% end %>
       </div>
-    <%= link_to 'Edit', edit_establishment_path(@establishment) %> |
-    <%= link_to 'Back', establishments_path %>
+
     </div>
+
+
+  </div>
 </div>  
 
 
@@ -58,10 +80,10 @@
 <div class="left-form-container">
     <div class="featurette">
       <% if @current_deals.length > 0 %>
-        <h2 class="featurette-heading" style="color:red;">these are the temporary deals</h2>
+        <h2 class="important-header">Temporary deals</h2>
         <hr>
       <% else %>
-        <h2 class="featurette-heading" style="color:red;">There are no temporary deals available</h2>
+        <h2 class="important-header">There are no Temporary deals available</h2>
       <% end %>
       <div class="field">
         <% @current_deals.each do |deal| %>
@@ -85,10 +107,10 @@
 <div class="right-form-container">
     <div class="featurette">
       <% if @permanent_deals.length > 0 %>
-        <h2 class="featurette-heading" style="color:red;">these are the permanent deals</h2>
+        <h2 class="important-header" style="">Permanent deals</h2>
         <hr>
       <% else %>
-        <h2 class="featurette-heading" style="color:red;">There are no permanent deals available</h2>
+        <h2 class="important-header" style="">There are no Permanent deals available</h2>
       <% end %>
       <div class="field">
         <% @permanent_deals.each do |deal| %>

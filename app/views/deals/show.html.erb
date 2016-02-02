@@ -1,9 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h2 class="featurette-heading" id="center-text" style="color:red;">this is a deal!</h2>
-
-<div class="new-wider-form">
-    <div class="featurette">
+<!-- <div class="new-wider-form"> -->
+<div class="show-establishment-box">
       <div class="field">
 		<h3 style="display:inline;">
 		  <div id="details"> 
@@ -19,14 +17,14 @@
 	                </a>
 	              </span>
 	            <% end %>
+				<span id="footnote-text">(<%= @deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
 		  </div>
-		</br>
+		</h3>
+
 <!-- 	        <p>
 	          <%= link_to "favorite",   favorite_deal_path(@deal, type: "favorite"), method: :put %> </br>
 	          <%= link_to "unfavorite",   favorite_deal_path(@deal, type: "unfavorite"), method: :put %>
-	        </p> -->
-		</h3>
-		<span id="footnote-text">(<%= @deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
+	        </p> -->	        
 
 		<p style="display:inline;"> 
 		</br> at
@@ -36,7 +34,8 @@
 		</p>
 
 		<p>
-		 <%= @deal.establishment.address if @deal.establishment %> <%=@deal.establishment.city if @deal.establishment%> <%=@deal.establishment.zipcode if @deal.establishment %>
+			 <%= @deal.establishment.address if @deal.establishment %> <%=@deal.establishment.city if @deal.establishment%> 
+			 <%=@deal.establishment.zipcode if @deal.establishment %>
 		</p>
 
 		<hr>
@@ -69,14 +68,16 @@
 		
 	  </div>
 
-	  Favorited by <%= @deal.get_likes %> users </br>
-	  </br>
-	  </br>
-	  
-	  <hr>
-	  <%= link_to 'Edit', edit_deal_path(@deal) %> |
-	  <%= link_to 'Back', deals_path %>
-	</div>
+      <div id="center-info">
+
+		  Favorited by <%= @deal.get_likes %> users </br>
+
+		  <% if @current_user.establishments.include? @deal.establishment  %>
+			  <%= link_to 'Edit', edit_deal_path(@deal) %> |
+	          <%= link_to 'Delete', @deal, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+			  <%= link_to 'Back', deals_path %>
+		  <% end %>
+	  </div>
 </div>
 
 

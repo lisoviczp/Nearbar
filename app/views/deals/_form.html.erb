@@ -2,9 +2,9 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 
+<h2 class="important-header" style="text-align:center;">Create Deal</h2>
 
-<div class="new-form">
-  <h1 id="center-text"> what's going on </h1>
+<div class="show-establishment-box">
   <%= simple_form_for(@deal, html: { class: 'form-horizontal' }) do |f| %>
     <% if @deal.errors.any? %>
       <div id="error_explanation">
@@ -19,23 +19,23 @@
     <% end %>
     <div class="featurette">
       <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
-      <h2 class="featurette-heading" style="color:red;">give it a name</h2>
+      <h2 class="featurette-heading" style="color:red;">Deal</h2>
         <div class="field">
-          <%= f.text_field :keyword %>
+          <%= f.text_field :keyword, placeholder: "give it a name" %>
         </div>
-      <h2 class="featurette-heading" style="color:red;">what is it?</h2>
+      <h2 class="featurette-heading" style="color:red;">Description</h2>
       <!-- <p class="lead">what is it? </br> -->
-        <%= f.text_area :description %>
+        <%= f.text_area :description, placeholder: "what's the deal?" %>
       </p>
     </div>
 
     <div class="featurette">
       <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
-      <h2 class="featurette-heading" style="color:red;">Deal Status</h2>
-      <div class="field">
-        <%= f.label "Click here if this is a temporary deal" %>
-        <%= f.check_box :temporary %></br>
-        <%= f.label "Click here if this is an ongoing special" %>
+      <h2 class="featurette-heading" style="color:red;">Status</h2>
+      <div class="field" id="details">
+        <%= f.label "Click if a temporary deal" %>
+        <%= f.check_box :temporary %> 
+        <%= f.label "Click if an ongoing special" %>
         <%= f.check_box :permanent %></br>
       </div>
     </div>
@@ -43,8 +43,8 @@
     <div class="featurette">
       <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
       <h2 class="featurette-heading" style="color:red;">Active?</h2>
-      <div class="field">
-        <%= f.label "Click here if you want all users to see this deal" %>
+      <div class="field" id="details">
+        <%= f.label "Click if you want all users to see this deal" %>
         <!-- <%= f.check_box :active %></br> -->
         <%= f.check_box :active, data: {'toggle' => "toggle"}, class: 'current-toggle' %>
       </div>
@@ -52,11 +52,13 @@
 
     <div class="featurette">
       <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
-      <h2 class="featurette-heading" style="color:red;">Establishment</h2>
-      <div class="field">
-          <%= f.association :establishment, collection: Establishment.where(user_id: @current_user.id) %>
-           <!-- f.collection_select :establishment, Establishment.all, :id, :name  -->
-      </div>
+      <% if @current_user %>
+        <h2 class="featurette-heading" style="color:red;">Establishment</h2>
+        <div class="field">
+            <%= f.association :establishment, label: false, collection: Establishment.where(user_id: @current_user.id) %>
+             <!-- f.collection_select :establishment, Establishment.all, :id, :name  -->
+        </div>
+      <% end %>
     </div>
 
     <div class="actions" id="center-text">

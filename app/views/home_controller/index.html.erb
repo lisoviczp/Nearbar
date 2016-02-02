@@ -1,74 +1,5 @@
 <style>
 
-#wrapper, #right-sidebar-wrapper {
-  /*border: 1px solid green;*/
-}
-
-.sidebar-nav {
-  /*border: 1px solid orange;*/
-  /*border-right: 1px solid gray;*/
-}
-
-#left-sidebar {
-  border-right: 1px solid gray;
-}
-
-hr {
-  width: 80%;
-}
-
-#sidebar-wrapper {
-  /*border: 1px solid yellow;*/
-  width: 250px;
-    z-index: 1000;
-    position: fixed;
-    left: 250px;
-    /*width: 0;*/
-    height: 100%;
-    margin-left: -250px;
-    overflow-y: auto;
-    background: white;
-/*    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;*/
-}
-
-#right-sidebar-wrapper {
-  /*border: 1px solid yellow;*/
-  border: 1px solid gray;
-  width: 350px;
-  z-index: 1000;
-  position: absolute;
-  right: 350px;
-  /*width: 0;*/
-  height: 100%;
-  margin-right: -330px;
-  overflow-y: auto;
-  background: white;
-  padding-right: 2em;
-}
-
-#page-content-wrapper {
-    width: 100%;
-    left: 250px;
-    position: absolute;
-    padding: 15px;
-    /*margin-top: -10px;*/
-    /*border: 3px solid black;*/
-}
-
-.container-fluid {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-#sidebar-header {
-    font-family: helvetica;
-    font-size: 1.5em;
-}
 
 
 </style>
@@ -81,7 +12,7 @@ hr {
     <div id="left-sidebar">
         <ul class="sidebar-nav">
             <% if @user_establishments %>
-                <h4 id="sidebar-header"> Yours </h4>
+                <h4 id="sidebar-header"> Your Establishments </h4>
             	<% @user_establishments.each do |establishment| %>
             		<li>
             			<span id="bold-link"> <%= link_to establishment.name, establishment %> </span>
@@ -129,7 +60,7 @@ hr {
             <!-- <h1>Simple Sidebar</h1> -->
 
             <div class="homepage-table-container">
-            <h1 id="details">Listing all Deals</h1>
+            <h1 class="important-header" id="">Listing all Deals</h1>
 
               <% @deals.each do |deal| %>
                 <div class="featurette">
@@ -189,7 +120,7 @@ hr {
 <div id="right-wrapper">
   <div id="right-sidebar-wrapper">
       <ul class="sidebar-nav">
-        <h4 id="sidebar-header"> Favorites Deals </h4>
+        <h4 id="sidebar-header"> Favorite Deals </h4>
           <% @favorite_deals.each do |deal| %>
             <div id="details">
               <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>

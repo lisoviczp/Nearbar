@@ -23,6 +23,77 @@
   color:#3aa5dc;
  }
 
+#wrapper, #right-sidebar-wrapper {
+  /*border: 1px solid green;*/
+}
+
+.sidebar-nav {
+  /*border: 1px solid orange;*/
+  /*border-right: 1px solid gray;*/
+}
+
+#left-sidebar {
+  border-right: 1px solid gray;
+}
+
+hr {
+  width: 80%;
+}
+
+#sidebar-wrapper {
+  /*border: 1px solid yellow;*/
+  width: 250px;
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    /*width: 0;*/
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: white;
+/*    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;*/
+}
+
+#right-sidebar-wrapper {
+  /*border: 1px solid yellow;*/
+  border: 1px solid gray;
+  width: 350px;
+  z-index: 1000;
+  position: absolute;
+  right: 350px;
+  /*width: 0;*/
+  height: 100%;
+  margin-right: -330px;
+  overflow-y: auto;
+  background: white;
+  padding-right: 2em;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    left: 250px;
+    position: absolute;
+    padding: 15px;
+    /*margin-top: -10px;*/
+    /*border: 3px solid black;*/
+}
+
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#sidebar-header {
+    font-family: helvetica;
+    font-size: 1.5em;
+}
+
+
 .new-form {
 	width: 50%;
 	/*text-align: center;*/
@@ -47,7 +118,7 @@
   margin-left: 25%;
   margin-top: 0.5em;
   margin-bottom: 2em;
-  padding-top: 1em;
+  padding-top: 0.5em;
   padding-left: 3em;
   padding-right: 3em;
   /*padding-bottom: 7em;*/
@@ -68,7 +139,8 @@
 .left-form-container {
   width: 49%;
   /*text-align: center;*/
-  border: 2px solid green;
+  /*border: 2px solid green;*/
+  border-right: 1px solid gray;
   float:left;
   margin-left: 1%;
   padding-top: 1em;
@@ -81,7 +153,8 @@
 .right-form-container {
   width: 49%;
   /*text-align: center;*/
-  border: 2px solid green;
+  /*border: 2px solid green;*/
+  /*border-left: 1px solid gray;*/
   float: right;
   margin-right: 1%;
   padding-top: 1em;
@@ -93,7 +166,7 @@
 .my-table-container {
 	width: 90%;
 	/*text-align: center;*/
-	border: 2px solid orange;
+	/*border: 2px solid orange;*/
 
 	margin-left: 5%;
 	margin-top: 2.5em;
@@ -134,6 +207,7 @@
   /*height: 200px;*/
   /*border: 5px solid green;*/
   padding-left: 20px;
+  margin-bottom: -15px;
 }
 .featurette-image {
   margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
@@ -175,7 +249,7 @@
 #details  {
   font-size: 1.25em;
   display: inline;
-  font-weight: 100;
+  font-weight: 200;
 }
 
 li {
@@ -233,6 +307,40 @@ ul.dropdown-menu {
   text-align: center;
   /*border: 5px solid blue;*/
 }
+
+#small-text {
+  font-weight: 200;
+  font-size: 0.8em;
+  font-family: helvetica;
+}
+
+#center-info {
+  text-align: center;
+  font-weight: 200;
+  font-size: 1.4em;
+  font-family: helvetica;
+}
+
+.important-header {
+  font-family: 'Pacifico', cursive;
+  color:#668eaa;
+}
+
+.select {
+  width: 25em;
+}
+
+textarea#deal_description {
+  /*background-color: green;*/
+  width: 35em;
+  height: 5em;
+  resize: none;
+}
+
+.field {
+  /*font-weight: 100;*/
+}
+
 /*a {
   color: green;
 }*/

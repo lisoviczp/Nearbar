@@ -11,6 +11,13 @@ class EstablishmentsController < ApplicationController
     else
       @establishments = Establishment.all
     end
+
+    @new_establishments = Establishment.where(
+      'created_at >= :five_days_ago or updated_at >= :three_days_ago',
+      :five_days_ago  => Time.now - 5.days,
+      :three_days_ago => Time.now - 3.days
+    )
+    
     @current_user=User.first
   end
 
