@@ -132,7 +132,9 @@ hr {
   padding-left: 3em;
   padding-right: 3em;
   padding-bottom: 1em;
+  background-color: white;
 }
+
 .new-wider-form {
   width: 60%;
   /*text-align: center;*/
@@ -355,6 +357,18 @@ textarea#deal_description {
   font-size: 0.75em;
   margin-top: -50px;
 }
+
+.semi-background {
+  background-image: url('barback.png');
+  padding-bottom: 10em;  
+}
+
+/*p#notice {
+  background-color: green;
+  display: none;
+}*/
+
+
 /*a {
   color: green;
 }*/

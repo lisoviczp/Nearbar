@@ -4,19 +4,21 @@
   classes, '.form-horizontal' or '.form-inline', as the following:
     = simple_form_for(@user, html: { class: 'form-horizontal' }) do |form| -->
 
-<div class="show-establishment-box">
-  <div id="center-text">
-    <h2 id="bold-large-link"> 
-      <%= link_to ('New Deal <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>').html_safe, new_deal_path %>
-    </h2>
-  </div>
+<div class="semi-background">
+  <div class="show-establishment-box">
+    <div id="center-text">
+      <h2 id="bold-large-link"> 
+        <%= link_to ('New Deal <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>').html_safe, new_deal_path %>
+      </h2>
+    </div>
 
-  <%= form_tag deals_path, :method => 'get' do %>
-    <p id="center-text">
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
-  <% end %>
+    <%= form_tag deals_path, :method => 'get' do %>
+      <p id="center-text">
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search", :name => nil %>
+      </p>
+    <% end %>
+  </div>
 </div>
 
 <div class="left-form-container">

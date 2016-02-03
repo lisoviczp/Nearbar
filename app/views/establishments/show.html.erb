@@ -1,76 +1,77 @@
 <p id="notice"><%= notice %></p>
 
+<div class="semi-background">
+  <!-- Showing the Establishment details -->
+  <div class="show-establishment-box">
+      <div class="featurette">
+        
+        <h2 class="featurette-heading" style="">
+          <span id="bold-large-link"><%= @establishment.name %></span>
+            <% if @current_user.favorites.include? @establishment %> 
+              <span id="bold-large-link-glyph">
+                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
+                  <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+              </span>
+            <% else %>
+              <span id="bold-large-link-glyph">
+                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "favorite"), method: :put, style: 'color:grey;' %>
+                  <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+              </span>
+            <% end %>
+        </h2>
 
-<!-- Showing the Establishment details -->
-<div class="show-establishment-box">
-    <div class="featurette">
-      
-      <h2 class="featurette-heading" style="">
-        <span id="bold-large-link"><%= @establishment.name %></span>
-          <% if @current_user.favorites.include? @establishment %> 
-            <span id="bold-large-link-glyph">
-              <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
-                <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+            <%= @establishment.address %>
+            <%= @establishment.city %>,
+            <%= @establishment.state %>
+            <%= @establishment.zipcode %> </br></br>
+            
+        <div class="field">
+          <p>
+            <strong>Keywords:</strong>
+            <%= @establishment.key %>
+          </p>
+        </div>
+
+        <h4>
+          <span id="bold-large-link-glyph" style="display:inline;">
+          <%= link_to ('<span style="" class="glyphicon glyphicon-phone" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
+          </span> 
+          <div id="small-text" style="display:inline;">
+            Click to receive texts <span id="footnote-text">(You will be notified whenever deals are posted)</span>
+          </div>
+        </h4> 
+
+        <h4>
+          <span id="bold-large-link-glyph">
+          <%= link_to ('<span style="" class="glyphicon glyphicon-envelope" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
+          </span> 
+          <div id="small-text" style="display:inline;">
+            Click for weekly emails <span id="footnote-text">(You will receive a weekly email detailing upcoming specials)</span>
+          </div> 
+        </h4>
+
+        </br>
+
+        <div id="center-info">
+          <%= @establishment.total_active_deals %> active deals </br>
+          Favorited by <%= @establishment.total_users_favorited %> user(s)   </br>
+
+          <% if @establishment.user == @current_user %>
+            <span id="footnote-text"> 
+              <%= link_to ('<span style="" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>').html_safe,establishments_path %> |
+              <%= link_to ('<span style="" class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, edit_establishment_path(@establishment) %> |
+              <%= link_to ('<span style="" class="glyphicon glyphicon-trash" aria-hidden="true"></span>').html_safe,@establishment, method: :delete, data: { confirm: 'Are you sure?' } %> 
+
             </span>
           <% else %>
-            <span id="bold-large-link-glyph">
-              <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "favorite"), method: :put, style: 'color:grey;' %>
-                <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+            <span id="footnote-text">
+              <%= link_to 'Back', establishments_path %>
             </span>
           <% end %>
-      </h2>
-
-          <%= @establishment.address %>
-          <%= @establishment.city %>,
-          <%= @establishment.state %>
-          <%= @establishment.zipcode %> </br></br>
-          
-      <div class="field">
-        <p>
-          <strong>Keywords:</strong>
-          <%= @establishment.key %>
-        </p>
-      </div>
-
-      <h4>
-        <span id="bold-large-link-glyph" style="display:inline;">
-        <%= link_to ('<span style="" class="glyphicon glyphicon-phone" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
-        </span> 
-        <div id="small-text" style="display:inline;">
-          Click to receive texts <span id="footnote-text">(You will be notified whenever deals are posted)</span>
         </div>
-      </h4> 
 
-      <h4>
-        <span id="bold-large-link-glyph">
-        <%= link_to ('<span style="" class="glyphicon glyphicon-envelope" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
-        </span> 
-        <div id="small-text" style="display:inline;">
-          Click for weekly emails <span id="footnote-text">(You will receive a weekly email detailing upcoming specials)</span>
-        </div> 
-      </h4>
-
-      </br>
-
-      <div id="center-info">
-        <%= @establishment.total_active_deals %> active deals </br>
-        Favorited by <%= @establishment.total_users_favorited %> user(s)   </br>
-
-        <% if @establishment.user == @current_user %>
-          <span id="footnote-text"> 
-            <%= link_to ('<span style="" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>').html_safe,establishments_path %> |
-            <%= link_to ('<span style="" class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, edit_establishment_path(@establishment) %> |
-            <%= link_to ('<span style="" class="glyphicon glyphicon-trash" aria-hidden="true"></span>').html_safe,@establishment, method: :delete, data: { confirm: 'Are you sure?' } %> 
-
-          </span>
-        <% else %>
-          <span id="footnote-text">
-            <%= link_to 'Back', establishments_path %>
-          </span>
-        <% end %>
       </div>
-
-    </div>
+  </div>
 </div>
 
 

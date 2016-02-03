@@ -1,19 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<div class="show-establishment-box">
-<div id="center-text">
-  <h2 id="bold-large-link"> 
-    <%= link_to ('New Establishment <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, new_establishment_path %>
-  </h2>
-</div>
+<div class="semi-background">
+  <div class="show-establishment-box">
+    <div id="center-text">
+      <h2 id="bold-large-link"> 
+        <%= link_to ('New Establishment <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, new_establishment_path %>
+      </h2>
+    </div>
 
 
-<%= form_tag your_establishments_path, :method => 'get' do %>
-  <p id="center-text">
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
+  <%= form_tag your_establishments_path, :method => 'get' do %>
+    <p id="center-text">
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+  <% end %>
+  </div>
 </div>
 
 <div class="my-table-container">

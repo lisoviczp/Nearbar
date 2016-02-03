@@ -1,8 +1,11 @@
+<div class="semi-background">
 
-<h2 class="important-header" style="text-align:center;">Create Establishment</h2>
+
 
 <!-- restaurants, bars, clubs, coffee / tea -->
 <div class="show-establishment-box">
+<h2 class="important-header" style="text-align:center;">Create Establishment</h2>
+  
   <%= form_for(@establishment) do |f| %>
     <% if @establishment.errors.any? %>
       <div id="error_explanation">
@@ -58,4 +61,6 @@
     </div>
 
   <% end %>
+</div>
+
 </div>
