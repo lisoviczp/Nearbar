@@ -21,12 +21,11 @@
 <div class="my-table-container">
 <h1 class="important-header" id="center-text" style="">Listing Your Establishments </h2>
 
-
   <% @establishments.each do |establishment| %>
     <div class="featurette">
         <h3 class="featurette-heading" style=""> 
           <span id="bold-large-link"><%= link_to establishment.name, establishment %></span>
-          <% if @current_user.favorites.include? establishment %> 
+          <% if user_signed_in? %> 
             <span id="bold-large-link-glyph">
               <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(establishment, type: "unfavorite"), method: :put %>
                 <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
@@ -47,7 +46,7 @@
            <%= establishment.city %>
            <%= establishment.state %>
            <%= establishment.zipcode %> </br>
-           <%= establishment.email %> </br>
+           <%= establishment.contact_info %> </br>
            <%= establishment.total_active_deals %> active deals </br>
          
           </p>

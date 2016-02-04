@@ -14,3 +14,21 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+
+
+
+$(document).ready(function() {
+	$("#first").hover(function() {
+	    $('html,body').animate({
+	        scrollTop: $("#second").offset().top},
+	        'slow');
+	});	
+
+	$("#second").hover(function() {
+	    $('html,body').animate({
+	        scrollTop: $("#third").offset().top},
+	        'slow');
+	});	
+})

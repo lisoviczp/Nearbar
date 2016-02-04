@@ -6,6 +6,12 @@ class Establishment < ActiveRecord::Base
 	has_many :favorite_establishments
 	has_many :favorited_by, through: :favorite_establishments, source: :user
 
+	validates :name, :presence => true
+	validates :address, :presence => true
+	validates :city, :presence => true
+	validates :state, :presence => true
+	validates :zipcode, :presence => true
+	validates :contact_info, :presence => true
 
 	def self.search(search)
 	  # if search

@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   
-  get 'home_controller/index'
+  devise_for :users
+  # get 'home/index'
 
   # root to: "deals#index"
-  root to: "home_controller#index"
+  root to: "home#index"
   resources :establishments
   resources :users
   resources :deals
@@ -25,6 +26,11 @@ Rails.application.routes.draw do
 
   # Favorites route for favoriting deals
   get '/favorite_deals', to: 'deals#favorite_deals_page', as: :favorite_deals_page
+
+
+  get 'info', to: 'home#info', as: :info_page
+  # get 'about' => 'home#about'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

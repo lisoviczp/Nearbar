@@ -46,11 +46,11 @@ gem 'twitter-bootstrap-rails'
 gem 'mini_exiftool_vendored'
 gem 'aws-sdk'
 gem 'simple_form'
-gem 'devise'
 gem "paperclip", "~> 4.3"
 gem 'twilio-ruby'
+gem 'devise'
 
-group :development do
+group :development, :test do
 	gem 'pry-rails'
 	# Use sqlite3 as the database for Active Record
 	gem 'sqlite3'

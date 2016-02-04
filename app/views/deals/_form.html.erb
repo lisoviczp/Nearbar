@@ -52,10 +52,10 @@
 
       <div class="featurette">
         <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
-        <% if @current_user %>
+        <% if current_user %>
           <h2 class="featurette-heading" style="color:red;">Establishment</h2>
           <div class="field">
-              <%= f.association :establishment, label: false, collection: Establishment.where(user_id: @current_user.id) %>
+              <%= f.association :establishment, label: false, collection: Establishment.where(user_id: current_user.id) %>
                <!-- f.collection_select :establishment, Establishment.all, :id, :name  -->
           </div>
         <% end %>

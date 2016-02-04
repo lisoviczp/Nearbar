@@ -13,7 +13,6 @@ class DealsController < ApplicationController
     else
       @deals = Deal.all.where(active: true)
     end
-    @current_user = User.first
 
     @featured_deals = Deal.where(
       'created_at >= :three_days_ago or updated_at >= :one_day_ago',
@@ -24,12 +23,10 @@ class DealsController < ApplicationController
   end
 
   def show
-    @current_user = User.first
     respond_with(@deal)
   end
 
   def new
-    @current_user = User.first
     @deal = Deal.new
     respond_with(@deal)
   end
@@ -68,21 +65,19 @@ class DealsController < ApplicationController
 
 
   def edit
-    @current_user = User.first
   end
 
   def favorite
     type = params[:type]
     @deal=Deal.find(params[:id])
-    @current_user=User.first
-    if type == "favorite" and ! @current_user.favorited_deals.include? @deal
+    if type == "favorite" and ! current_user.favorited_deals.include? @deal
       # pry
       # @current_user=User.first
-      @current_user.favorited_deals << @deal
+      current_user.favorited_deals << @deal
       redirect_to :back, notice: "You favorited #{@deal.keyword}"
 
     elsif type == "unfavorite"
-      @current_user.favorited_deals.delete(@deal)
+      current_user.favorited_deals.delete(@deal)
       redirect_to :back, notice: "Unfavorited #{@deal.keyword}"
 
     else
@@ -92,8 +87,7 @@ class DealsController < ApplicationController
   end
 
   def favorite_deals_page
-    @current_user = User.first
-    @deals = @current_user.favorited_deals
+    @deals = current_user.favorited_deals
     respond_with(@deals)
   end
 

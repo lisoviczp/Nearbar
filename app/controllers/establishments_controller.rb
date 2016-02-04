@@ -18,14 +18,12 @@ class EstablishmentsController < ApplicationController
       :three_days_ago => Time.now - 3.days
     )
     
-    @current_user=User.first
   end
 
   def show
     # Only will show deals that are active
     @current_deals = Deal.all.where(establishment_id: @establishment, temporary: true, active: true)
     @permanent_deals = Deal.all.where(establishment_id: @establishment, temporary: false, active: true)
-    @current_user=User.first
     
     # pry
     respond_with(@establishment)
@@ -42,15 +40,13 @@ class EstablishmentsController < ApplicationController
   def favorite
     type = params[:type]
     @establishment=Establishment.find(params[:id])
-    @current_user=User.first
-    if type == "favorite" and ! @current_user.favorites.include? @establishment
-      # pry
-      # @current_user=User.first
-      @current_user.favorites << @establishment
+
+    if type == "favorite" and ! current_user.favorites.include? @establishment
+      current_user.favorites << @establishment
       redirect_to :back, notice: "You favorited #{@establishment.name}"
 
     elsif type == "unfavorite"
-      @current_user.favorites.delete(@establishment)
+      current_user.favorites.delete(@establishment)
       redirect_to :back, notice: "Unfavorited #{@establishment.name}"
 
     else
@@ -61,19 +57,18 @@ class EstablishmentsController < ApplicationController
 
 
   def favorites_page
-    @current_user = User.first
-    @establishments = @current_user.favorites
+    @establishments = current_user.favorites
     respond_with(@establishments)
   end
 
   def your_establishments
-    @current_user = User.first
-    @establishments = Establishment.where(user_id: @current_user)
+    @establishments = Establishment.where(user: current_user)
   end
 
 
   def create
     @establishment = Establishment.new(establishment_params)
+    @establishment.user = current_user
     @establishment.save
     respond_with(@establishment)
   end

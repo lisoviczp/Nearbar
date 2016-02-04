@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <!-- <div class="new-wider-form"> -->
 <div class="show-establishment-box">
@@ -6,7 +5,7 @@
 		<h3 style="display:inline;">
 		  <div id="details"> 
 		  	<span id="bold-large-link"><%= @deal.keyword %> </span>
-	            <% if @current_user.favorited_deals.include? @deal %> 
+	            <% if current_user.favorited_deals.include? @deal %> 
 	              <span id="bold-large-link-glyph">
 	                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(@deal, type: "unfavorite"), method: :put %>
 	                </a>
@@ -72,7 +71,7 @@
 
 		  Favorited by <%= @deal.get_likes %> users </br>
 
-		  <% if @current_user.establishments.include? @deal.establishment  %> 
+		  <% if current_user.establishments.include? @deal.establishment  %> 
 			  <%= link_to ('<span style="" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>').html_safe, deals_path %> | 
 			  <%= link_to ('<span style="" class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, edit_deal_path(@deal) %> |
 	          <%= link_to ('<span style="" class="glyphicon glyphicon-trash" aria-hidden="true"></span>').html_safe, @deal, method: :delete, data: { confirm: 'Are you sure?' } %> 

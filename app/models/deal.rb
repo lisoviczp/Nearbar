@@ -6,6 +6,9 @@ class Deal < ActiveRecord::Base
 	has_many :favorite_deals # just the 'relationships'
 	has_many :favorited_deals_by, through: :favorite_deals, source: :user # the actual users favoriting a deal
 
+	validates :keyword, :presence => true
+	validates :active, :presence => true
+	validates :establishment_id, :presence => true
 
 	def self.search(search)
 	  # if search

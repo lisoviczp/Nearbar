@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="semi-background">
   <!-- Showing the Establishment details -->
   <div class="show-establishment-box">
@@ -7,7 +5,7 @@
         
         <h2 class="featurette-heading" style="">
           <span id="bold-large-link"><%= @establishment.name %></span>
-            <% if @current_user.favorites.include? @establishment %> 
+            <% if current_user.favorites.include? @establishment %> 
               <span id="bold-large-link-glyph">
                 <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_establishment_path(@establishment, type: "unfavorite"), method: :put %>
                   <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
@@ -56,7 +54,7 @@
           <%= @establishment.total_active_deals %> active deals </br>
           Favorited by <%= @establishment.total_users_favorited %> user(s)   </br>
 
-          <% if @establishment.user == @current_user %>
+          <% if @establishment.user == current_user %>
             <span id="footnote-text"> 
               <%= link_to ('<span style="" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>').html_safe,establishments_path %> |
               <%= link_to ('<span style="" class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, edit_establishment_path(@establishment) %> |
