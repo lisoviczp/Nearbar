@@ -126,6 +126,6 @@ class DealsController < ApplicationController
     end
 
     def deal_params
-      params.require(:deal).permit(:keyword, :description, :temporary, :permanent, :establishment_id, :active)
+      params.require(:deal).permit(:keyword, :description, :temporary, :permanent, :establishment_id, :active, :weekday)
     end
 end

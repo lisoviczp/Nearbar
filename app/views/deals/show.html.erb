@@ -45,6 +45,7 @@
 
 		<p>
 		  <% if @deal.temporary? %>
+			  <%= @deal.weekday%>! 
 			  <div style="color:green;"> This is a temporary deal only. Hurry over! </div>
 			<% else %>
 			  <div style="color:black;"> This is permanently offered bc we love you </div>

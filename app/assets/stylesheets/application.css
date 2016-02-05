@@ -82,6 +82,22 @@ hr {
   padding-right: 2em;
 }
 
+#right-sidebar-permanent {
+    /*border: 1px solid yellow;*/
+  border: 1px solid gray;
+  border-radius: 3px;
+  width: 350px;
+  z-index: 1000;
+  position: absolute;
+  right: 350px;
+  /*width: 0;*/
+  height: 100%;
+  margin-right: -330px;
+  overflow-y: auto;
+  background: white;
+  top: 0;
+}
+
 #page-content-wrapper {
     width: 100%;
     left: 250px;

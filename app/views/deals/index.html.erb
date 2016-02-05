@@ -28,7 +28,7 @@
         <h3 style=""> 
           <div id="details">
             <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-              <% if current_user.favorited_deals.include? deal %> 
+              <% if current_user and current_user.favorited_deals.include? deal %> 
                 <span id="bold-large-link-glyph">
                   <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
                     <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
@@ -79,7 +79,7 @@
         <h3 style=""> 
           <div id="details">
             <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-              <% if current_user.favorited_deals.include? deal %> 
+              <% if current_user and current_user.favorited_deals.include? deal %> 
                 <span id="bold-large-link-glyph">
                   <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
                     <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->

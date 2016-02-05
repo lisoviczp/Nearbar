@@ -31,6 +31,18 @@
 
       <div class="featurette">
         <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
+        <% if current_user %>
+          <h2 class="featurette-heading" style="color:red;">Establishment</h2>
+          <div class="field">
+              <%= f.select :weekday, ['Today', 'Monday', 'Tuesday', 'Wednesday',
+                'Thursday', 'Friday', 'Saturday', 'Sunday'] %>
+               <!-- f.collection_select :establishment, Establishment.all, :id, :name  -->
+          </div>
+        <% end %>
+      </div>
+
+      <div class="featurette">
+        <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
         <h2 class="featurette-heading" style="color:red;">Status</h2>
         <div class="field" id="details">
           <%= f.label "Click if a temporary deal" %>

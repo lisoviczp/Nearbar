@@ -10,8 +10,8 @@ class Establishment < ActiveRecord::Base
 	validates :address, :presence => true
 	validates :city, :presence => true
 	validates :state, :presence => true
-	validates :zipcode, :presence => true
-	validates :contact_info, :presence => true
+	# validates :zipcode, :presence => true
+	# validates :contact_info, :presence => true
 
 	def self.search(search)
 	  # if search

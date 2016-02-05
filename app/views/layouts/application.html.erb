@@ -55,6 +55,9 @@
                 <li class=""><a href="/favorite_deals">Favorite Deals</a></li>
                 <li role="separator" class="divider"></li>
                 <li>
+                  <%= link_to('Edit Account', edit_user_path(current_user)) %>        
+                </li>
+                <li>
                   <%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %>        
                 </li>
               </ul>

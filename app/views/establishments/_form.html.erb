@@ -1,3 +1,25 @@
+<style>
+
+input#establishment_drinks {
+  width: 25em;
+  height: 10em;
+}
+
+#text-box-right {
+  /*position:relative;*/
+  /*float: right;*/
+}
+
+#forms-left {
+  /*float:left;*/
+}
+
+.edit-forms {
+  /*border: 2px solid black;*/
+}
+
+</style>
+
 <div class="semi-background">
 
 
@@ -19,39 +41,49 @@
       </div>
     <% end %>
 
-    <div class="featurette">
-      <h2 class="featurette-heading" style="color:red;">Name</h2>
-      <div class="field">
-        <%= f.text_field :name, placeholder: "Establishment Name" %>
+    <div class="edit-forms" id="forms-left">
+      <div class="featurette">
+        <h2 class="featurette-heading" style="color:red;">Name</h2>
+        <div class="field">
+          <%= f.text_field :name, placeholder: "Establishment Name" %>
+        </div>
+        <h2 class="featurette-heading" style="color:red;">Keywords</h2>
+        <div class="field">
+          <%= f.text_field :key, label: :none, placeholder: "What are your go-to's?" %>
+        </div>
       </div>
-      <h2 class="featurette-heading" style="color:red;">Keywords</h2>
-      <div class="field">
-        <%= f.text_field :key, label: :none, placeholder: "What are your go-to's?" %>
+
+      <div class="featurette" id="text-box-right">
+        <h2 class="featurette-heading" wrap="hard" style="color:red;">Drinks</h2>
+        <%= f.text_field :drinks, placeholder: 'What do you have to drink?' %></br>
       </div>
+
+      <div class="featurette">
+        <h2 class="featurette-heading" style="color:red;">where are you</h2>
+        <div class="field">
+        <%= f.text_field :address, placeholder: 'Address' %>
+        </div>
+        <div class="field">
+          <%= f.text_field :city, placeholder: 'City' %>
+        </div>
+        <div class="field">
+          <%= f.text_field :state, placeholder: 'State' %>
+        </div>
+        <div class="field">
+          <%= f.text_field :zipcode, placeholder: 'Zipcode' %>
+        </div>
+      </div>
+
+      <div class="featurette">
+        <h2 class="featurette-heading" style="color:red;">contact</h2>
+        <div class="field">
+          <%= f.text_field :contact_info, placeholder: 'Contact' %>
+        </div>
+      </div>
+
+
     </div>
 
-    <div class="featurette">
-      <h2 class="featurette-heading" style="color:red;">where are you</h2>
-      <div class="field">
-      <%= f.text_field :address, placeholder: 'Address' %>
-      </div>
-      <div class="field">
-        <%= f.text_field :city, placeholder: 'City' %>
-      </div>
-      <div class="field">
-        <%= f.text_field :state, placeholder: 'State' %>
-      </div>
-      <div class="field">
-        <%= f.text_field :zipcode, placeholder: 'Zipcode' %>
-      </div>
-    </div>
-
-    <div class="featurette">
-      <h2 class="featurette-heading" style="color:red;">contact</h2>
-      <div class="field">
-        <%= f.text_field :contact_info, placeholder: 'Contact' %>
-      </div>
-    </div>
 
     <div id="center-text">
       <div class="actions">
