@@ -2,6 +2,7 @@ require 'twilio-ruby'
 
 class DealsController < ApplicationController
   before_action :set_deal, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   respond_to :html
 
@@ -20,6 +21,16 @@ class DealsController < ApplicationController
       :one_day_ago => Time.now - 1.days
     )
 
+    today=Time.now.strftime("%A")
+    @todays_deals=Deal.where(:weekday=>[today,"Today"])
+
+    @featured_deals = []
+    # Threshold to be a featured deal is currently 0 favorites...
+    Deal.all.each do |deal|
+      if deal.get_likes > 0
+        @featured_deals << deal
+      end
+    end
   end
 
   def show
@@ -87,8 +98,12 @@ class DealsController < ApplicationController
   end
 
   def favorite_deals_page
-    @deals = current_user.favorited_deals
-    respond_with(@deals)
+    if user_signed_in?
+      @deals = current_user.favorited_deals
+      respond_with(@deals)
+    else
+      redirect_to deals_path
+    end
   end
 
   def create

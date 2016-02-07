@@ -17,7 +17,13 @@ class EstablishmentsController < ApplicationController
       :five_days_ago  => Time.now - 5.days,
       :three_days_ago => Time.now - 3.days
     )
-    
+    @featured_establishments = []
+    # Threshold to be a featured deal is currently 0 favorites...
+    Establishment.all.each do |establishment|
+      if establishment.total_users_favorited >= 2
+        @featured_establishments << establishment
+      end
+    end
   end
 
   def show
@@ -25,7 +31,9 @@ class EstablishmentsController < ApplicationController
     @current_deals = Deal.all.where(establishment_id: @establishment, temporary: true, active: true)
     @permanent_deals = Deal.all.where(establishment_id: @establishment, temporary: false, active: true)
     
-    # pry
+    today=Time.now.strftime("%A")
+    @todays_deals = Deal.where(establishment_id: @establishment, weekday: ['Today', today])
+
     respond_with(@establishment)
   end
 
@@ -57,8 +65,13 @@ class EstablishmentsController < ApplicationController
 
 
   def favorites_page
-    @establishments = current_user.favorites
-    respond_with(@establishments)
+    if user_signed_in?
+      @establishments = current_user.favorites
+      respond_with(@establishments)
+    else
+      redirect_to establishments_path
+    end
+    
   end
 
   def your_establishments

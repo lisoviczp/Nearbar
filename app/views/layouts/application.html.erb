@@ -17,21 +17,13 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li><a href="/">Home</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Establishments</a>
-              <ul class="dropdown-menu">
-                <li><a href="/establishments">Establishments</a></li>
-                <li><a href="/your_establishments">Your Establishments</a></li>
-              </ul>
-          </li>
+        <li><a href="/establishments">Establishments</a></li>
         <li><a href="/deals">Deals</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Favorites </a>
             <ul class="dropdown-menu">
               <li class=""><a href="/favorites">Favorite Places</a></li>
               <li class=""><a href="/favorite_deals">Favorite Deals</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
             </ul>
         </li>
       </ul>
@@ -42,10 +34,14 @@
             <%= link_to ('New Establishment <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>').html_safe, new_establishment_path %>
           </li>
 
+          <% if current_user.establishments.size > 0 %>
+            <li>
+              <%= link_to ('New Deal <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>').html_safe, new_deal_path %>
+            </li>
+          <% end %>
           <li>
-            <%= link_to ('New Deal <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>').html_safe, new_deal_path %>
+            <a href="#"><%= current_user.username %></a>
           </li>
-          
           <li class="dropdown">            
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Account</a>
               <ul class="dropdown-menu">
@@ -93,7 +89,15 @@
 
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
+<script type="text/javascript">
 
+$(document).ready(function(){
+  setTimeout(function(){
+    $('.notice').remove();
+  }, 5000);
+ })
+
+</script>
 <%= yield %>
 
 

@@ -4,17 +4,21 @@ class UsersController < ApplicationController
   respond_to :html
 
   def index
-    @users = User.all
-    respond_with(@users)
+    # redirect_to root_path
+    # @users = User.all
+    # respond_with(@users)
   end
 
   def show
+    # redirect_to root_path
+    
     respond_with(@user)
   end
 
   def new
-    @user = User.new
-    respond_with(@user)
+    redirect_to root_path
+    # @user = User.new
+    # respond_with(@user)
   end
 
   def edit

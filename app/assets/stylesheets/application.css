@@ -68,7 +68,9 @@ hr {
 
 #right-sidebar-wrapper {
   /*border: 1px solid yellow;*/
-  border: 1px solid gray;
+  border-bottom: 1px solid gray;
+  border-right: 1px solid gray;
+  border-left: 1px solid gray;
   border-radius: 3px;
   width: 350px;
   z-index: 1000;
@@ -144,6 +146,20 @@ hr {
   margin-left: 25%;
   margin-top: 0.5em;
   margin-bottom: 2em;
+  padding-top: 0.5em;
+  padding-left: 3em;
+  padding-right: 3em;
+  padding-bottom: 1em;
+  background-color: white;
+/*  background-image: url('barback.png');
+  background-size: contain;
+  font-color:white;*/
+}
+
+.show-establishment-box-new {
+  border-bottom: 2px solid gray;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
   padding-top: 0.5em;
   padding-left: 3em;
   padding-right: 3em;
@@ -237,6 +253,13 @@ hr {
   padding-left: 20px;
   margin-bottom: -15px;
 }
+
+/*.featurette.lovish {
+  border-bottom: 1px solid gray;
+  border-left: 1px solid gray;
+  line-height: 10px;
+}*/
+
 .featurette-image {
   margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
   height: 300px;
@@ -379,10 +402,18 @@ textarea#deal_description {
   padding-bottom: 10em;  
 }
 
-/*p#notice {
-  background-color: green;
+p.alert {
+  background-color: blue;
+  text-align: center;
   display: none;
-}*/
+}
+p.notice {
+  /*background-color: gray;*/
+  /*display: none;*/
+}
+.notice {
+  text-align: center;
+}
 
 
 /*a {

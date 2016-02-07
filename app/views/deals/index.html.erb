@@ -1,128 +1,159 @@
 
-<!--   Inside your views, use the 'simple_form_for' with one of the Bootstrap form
-  classes, '.form-horizontal' or '.form-inline', as the following:
-    = simple_form_for(@user, html: { class: 'form-horizontal' }) do |form| -->
+<style>
+  
+#left-nav.col-md-3{
+  /*border-left: 1px solid gray;*/
+  border-right: 1px solid gray;
+  /*border-bottom: 1px solid gray;*/
+}
 
-<div class="semi-background">
-  <div class="show-establishment-box">
-    <div id="center-text">
-      <h2 id="bold-large-link"> 
-        <%= link_to ('New Deal <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>').html_safe, new_deal_path %>
-      </h2>
+.col-md-6 {
+  /*border: 1px solid orange;*/
+}
+
+#right-nav.col-md-3 {
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  /*margin-right: 1em;*/
+  border-radius: 3px;
+}
+
+</style>
+
+
+<!-- This is the LEFT SideBar, where we will show the User's etablishments and/or Favorited establishments -->
+
+<div class="container-fluid">
+    <div class="col-md-3" id="left-nav">
+      <h4 class="important-header" id="center-text"> Featured Deals </h4>
+      <% @featured_deals.each do |deal| %>
+        <div id="details">
+          <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
+            <% if user_signed_in? and current_user.favorited_deals.include? deal %> 
+              <span id="bold-large-link-glyph">
+                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
+                  <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+              </span>
+            <% elsif user_signed_in? and !current_user.favorited_deals.include? deal %>
+              <span id="bold-large-link-glyph">
+                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "favorite"), method: :put, style: 'color:grey;' %>
+                  <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+              </span>
+
+            <% end %>
+            <% if deal.establishment %>
+              <p> by 
+                <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span>
+                <span id="footnote-text"><% deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%></span>
+                <% if deal.weekday == 'Today' %>
+                  </br><%= deal.weekday %>!
+                <% else %>
+                  </br>On <%= deal.weekday %>'s
+                <% end %>
+              </p>
+            <% end %>
+          </div>
+          <hr>
+      <% end %>
     </div>
 
-    <%= form_tag deals_path, :method => 'get' do %>
-      <p id="center-text">
-        <%= text_field_tag :search, params[:search] %>
-        <%= submit_tag "Search", :name => nil %>
-      </p>
-    <% end %>
-  </div>
-</div>
+    <!-- This is where all the Deals will be listed -->
+    <div class="col-md-6" id="middle">
+              <!-- <h1>Simple Sidebar</h1> -->
+      <h1 class="important-header" id="">All Deals</h1>
+      <% @deals.each do |deal| %>
+        <div class="featurette">
+            <h3 class="featurette-heading"> 
+              <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
+                <% if user_signed_in? and current_user.favorited_deals.include? deal %> 
+                  <span id="bold-large-link-glyph">
+                    <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
+                      <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+                    </a>
+                  </span>
+                <% elsif user_signed_in? and !current_user.favorited_deals.include? deal  %>
+                  <span id="bold-large-link-glyph">
+                    <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "favorite"), method: :put, style: 'color:grey;' %>
+                      <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+                    </a>
+                  </span>
+                <% end %>
+            </h3>
 
-<div class="left-form-container">
-  <h1 class="important-header" id="center-text">All Deals</h1>
-  <% @deals.each do |deal| %>
-    <div class="featurette">
 
-        <h3 style=""> 
+            <div class="field">
+              <% if deal.establishment %>
+                <p> by 
+                  <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %></span> 
+                  <span class="address-oneliner">
+                     <%= deal.establishment.address %>
+                     <%= deal.establishment.city %>
+                     <%= deal.establishment.state %>
+                     <%= deal.establishment.zipcode %> 
+                  </span> </br>
+                  <span id="footnote-text"> <% deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%> </span> <!-- Not Displaying -->
+                </p>
+              <% end %>
+
+              <%= deal.description %>
+
+              <p>
+                Favorited by <%= deal.get_likes %> user(s) |
+
+                <% if deal.temporary? %>
+                  <span style="color:green;"> This is a temporary deal only. Hurry over! </span>
+                <% else %>
+                  <span style="color:black;"> This is permanently offered bc we love you </span>
+                <% end %>
+                <% if deal.weekday == 'Today' %>
+                  </br><%= deal.weekday %>!
+                <% else %>
+                  </br>On <%= deal.weekday %>'s
+                <% end %>                        
+              </p>
+            </div>
+
+            <hr class="featurette-divider"/>
+        </div>
+      <% end %>
+    </div>
+
+
+
+  <!-- This is the RIGHTSideBar, where we will show the User's etablishments and/or Favorited establishments -->
+    <div class="col-md-3" id="right-nav">
+      <h4 class="important-header" id="center-text"> Today's Deals </h4>
+        <% @todays_deals.each do |deal| %>
           <div id="details">
             <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-              <% if current_user and current_user.favorited_deals.include? deal %> 
+              <% if user_signed_in? and current_user.favorited_deals.include? deal %> 
                 <span id="bold-large-link-glyph">
                   <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
                     <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
-                  </a>
                 </span>
-              <% else %>
+              <% elsif user_signed_in? and !current_user.favorited_deals.include? deal  %>
                 <span id="bold-large-link-glyph">
                   <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "favorite"), method: :put, style: 'color:grey;' %>
                     <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
-                  </a>
                 </span>
+
+              <% end %>
+              <% if deal.establishment %>
+                <p> by 
+                  <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span>
+                  <span id="footnote-text"><% deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%></span>
+                  <% if deal.weekday == 'Today' %>
+                    </br><%= deal.weekday %>!
+                  <% else %>
+                    </br>On <%= deal.weekday %>'s
+                  <% end %>                  
+                </p>
               <% end %>
             </div>
-        </h3>
-        
-        
-        <div class="details">
-          <% if deal.establishment %>
-            <p> by 
-              <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span>
-              <span id="footnote-text"> (<%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
-            </p>
-          <% end %>
-          <%= deal.description %>
-
-          <p>
-          <% if deal.temporary? %>
-            <div style="color:green;"> This is a temporary deal only. Hurry over! </div>
-          <% else %>
-            <div style="color:black;"> This is permanently offered bc we love you </div>
-          <% end %>
-          </p>
-          Favorited by <%= deal.get_likes %> user(s)
-          <!-- <%= link_to 'edit', edit_deal_path(deal) %></p> -->
-          <!-- <td><% link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-        </div>
-        
-        <hr class="featurette-divider"/>
+            <hr>
+        <% end %>
     </div>
-  <% end %>
+
 </div>
-
-<div class="right-form-container">
-  <h1 class="important-header" id="center-text">Featured Deals</h1>
-  <% @featured_deals.each do |deal| %>
-    <div class="featurette">
-
-        <h3 style=""> 
-          <div id="details">
-            <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-              <% if current_user and current_user.favorited_deals.include? deal %> 
-                <span id="bold-large-link-glyph">
-                  <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
-                    <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
-                  </a>
-                </span>
-              <% else %>
-                <span id="bold-large-link-glyph">
-                  <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "favorite"), method: :put, style: 'color:grey;' %>
-                    <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
-                  </a>
-                </span>
-              <% end %>
-            </div>
-        </h3>
-        
-        
-        <div class="details">
-          <% if deal.establishment %>
-            <p> by 
-              <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span>
-              <span id="footnote-text"> (<%= deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
-            </p>
-          <% end %>
-          <%= deal.description %>
-
-          <p>
-          <% if deal.temporary? %>
-            <div style="color:green;"> This is a temporary deal only. Hurry over! </div>
-          <% else %>
-            <div style="color:black;"> This is permanently offered bc we love you </div>
-          <% end %>
-          </p>
-          Favorited by <%= deal.get_likes %> user(s)
-          <!-- <%= link_to 'edit', edit_deal_path(deal) %></p> -->
-          <!-- <td><% link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-        </div>
-        
-        <hr class="featurette-divider"/>
-    </div>
-  <% end %>
-</div>
-
-
-<br>
-
 

@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   def index
 
     if user_signed_in?
-    	if current_user.establishments
+    	if current_user.establishments.size > 0
     		@user_establishments = current_user.establishments
     	end
 

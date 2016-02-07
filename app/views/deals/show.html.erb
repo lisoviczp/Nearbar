@@ -5,18 +5,18 @@
 		<h3 style="display:inline;">
 		  <div id="details"> 
 		  	<span id="bold-large-link"><%= @deal.keyword %> </span>
-	            <% if current_user.favorited_deals.include? @deal %> 
+	            <% if user_signed_in? and current_user.favorited_deals.include? @deal %> 
 	              <span id="bold-large-link-glyph">
 	                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(@deal, type: "unfavorite"), method: :put %>
 	                </a>
 	              </span>
-	            <% else %>
+	            <% elsif user_signed_in? and !current_user.favorited_deals.include? @deal  %>
 	              <span id="bold-large-link-glyph">
 	                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(@deal, type: "favorite"), method: :put, style: 'color:grey;' %>
 	                </a>
 	              </span>
 	            <% end %>
-				<span id="footnote-text">(<%= @deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%>) </span>
+				<span id="footnote-text"><% @deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%> </span> <!-- Not showing at the moment-->
 		  </div>
 		</h3>
 
@@ -40,12 +40,12 @@
 		<hr>
 
 		<p style="display:inline;">
-		  <div id="details"><%= @deal.description %></div>
+		  <div id="details"><%= @deal.description %></div> (On <%= @deal.weekday %>'s) 
+
 		</p>
 
 		<p>
 		  <% if @deal.temporary? %>
-			  <%= @deal.weekday%>! 
 			  <div style="color:green;"> This is a temporary deal only. Hurry over! </div>
 			<% else %>
 			  <div style="color:black;"> This is permanently offered bc we love you </div>
@@ -72,7 +72,7 @@
 
 		  Favorited by <%= @deal.get_likes %> users </br>
 
-		  <% if current_user.establishments.include? @deal.establishment  %> 
+		  <% if user_signed_in? and current_user.establishments.include? @deal.establishment  %> 
 			  <%= link_to ('<span style="" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>').html_safe, deals_path %> | 
 			  <%= link_to ('<span style="" class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, edit_deal_path(@deal) %> |
 	          <%= link_to ('<span style="" class="glyphicon glyphicon-trash" aria-hidden="true"></span>').html_safe, @deal, method: :delete, data: { confirm: 'Are you sure?' } %> 

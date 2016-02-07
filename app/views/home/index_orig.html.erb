@@ -1,0 +1,157 @@
+<style>
+
+</style>
+
+<!-- This is the LEFT SideBar, where we will show the User's etablishments and/or Favorited establishments -->
+<% if user_signed_in? %>
+  <div id="wrapper">
+    <div id="sidebar-wrapper">
+      <div id="left-sidebar">
+          <ul class="sidebar-nav">
+              <% if @user_establishments %>
+                  <h4 id="important-header"> Your Establishments </h4>
+                <% @user_establishments.each do |establishment| %>
+                  <li>
+                    <span id="bold-link"> <%= link_to establishment.name, establishment %> </span>
+                  </li>
+                  <p>
+                     <%= establishment.address %>
+                     <%= establishment.city %>
+                     <%= establishment.state %> </br>
+                     <%= establishment.total_active_deals %> active deals </br>
+                    <hr>
+                   </p>
+                <% end %>
+              <% end %>
+              <% if @favorite_establishments.size > 0 %>
+                  <h4 id="important-header"> Favorite Spots </h4>
+                  <% @favorite_establishments.each do |establishment| %>
+                      <li>
+                          <span id="bold-link"><%= link_to establishment.name, establishment %></span>
+                      </li>
+                      <p>
+                         <%= establishment.address %>
+                         <%= establishment.city %>
+                         <%= establishment.state %> </br>
+                         <%= establishment.total_active_deals %> active deals </br>
+                          <hr>
+                     </p>
+                  <% end %>
+              <% else %>
+                <h4 class="important-header"> Favorites </h4>
+                <li> Your favorite establishments will appear here</li>
+              <% end %>
+          </ul>
+     </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+
+<!-- This is where all the Deals will be listed -->
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-12">
+            <!-- <h1>Simple Sidebar</h1> -->
+            <div class="homepage-table-container">
+            <h1 class="important-header" id="">Listing all Deals</h1>
+              <% @deals.each do |deal| %>
+                <div class="featurette">
+                    <h3 class="featurette-heading"> 
+                      <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
+                        <% if current_user.favorited_deals.include? deal %> 
+                          <span id="bold-large-link-glyph">
+                            <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
+                              <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+                            </a>
+                          </span>
+                        <% else %>
+                          <span id="bold-large-link-glyph">
+                            <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "favorite"), method: :put, style: 'color:grey;' %>
+                              <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+                            </a>
+                          </span>
+                        <% end %>
+                    </h3>
+
+
+                    <div class="field">
+                      <% if deal.establishment %>
+                        <p> by 
+                          <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %></span> 
+                          <span class="address-oneliner">
+                             <%= deal.establishment.address %>
+                             <%= deal.establishment.city %>
+                             <%= deal.establishment.state %>
+                             <%= deal.establishment.zipcode %> 
+                          </span> </br>
+                          <span id="footnote-text"> <% deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%> </span>
+                        </p>
+                      <% end %>
+
+                      <%= deal.description %>
+
+                      <p>
+                        Favorited by <%= deal.get_likes %> user(s) |
+
+                        <% if deal.temporary? %>
+                          <span style="color:green;"> This is a temporary deal only. Hurry over! </span>
+                        <% else %>
+                          <span style="color:black;"> This is permanently offered bc we love you </span>
+                        <% end %>
+                      </p>
+                    </div>
+
+                    <hr class="featurette-divider"/>
+                </div>
+              <% end %>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- This is the RIGHTSideBar, where we will show the User's etablishments and/or Favorited establishments -->
+<% if user_signed_in? and @favorite_deals %>
+  <div id="right-wrapper">
+    <div id="right-sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <h4 class="important-header"> Today's Deals </h4>
+            <% @todays_deals.each do |deal| %>
+              <div id="details">
+                <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
+                  <% if current_user.favorited_deals.include? deal %> 
+                    <span id="bold-large-link-glyph">
+                      <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
+                        <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+                    </span>
+                  <% else %>
+                    <span id="bold-large-link-glyph">
+                      <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "favorite"), method: :put, style: 'color:grey;' %>
+                        <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
+                    </span>
+
+                  <% end %>
+                  <% if deal.establishment %>
+                    <p> by 
+                      <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span>
+                      <span id="footnote-text"><% deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%></span>
+                    </p>
+                  <% end %>
+                </div>
+                <hr>
+              <% end %>
+        </ul>
+    </div>
+  </div>
+<% end %>
