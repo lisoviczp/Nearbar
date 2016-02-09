@@ -26,6 +26,29 @@ class EstablishmentsController < ApplicationController
     end
   end
 
+  def tests
+    # @establishments = Establishment.all
+    # respond_with(@establishments)
+    if params[:search]
+      @establishments = Establishment.search(params[:search])
+    else
+      @establishments = Establishment.all
+    end
+
+    @new_establishments = Establishment.where(
+      'created_at >= :five_days_ago or updated_at >= :three_days_ago',
+      :five_days_ago  => Time.now - 5.days,
+      :three_days_ago => Time.now - 3.days
+    )
+    @featured_establishments = []
+    # Threshold to be a featured deal is currently 0 favorites...
+    Establishment.all.each do |establishment|
+      if establishment.total_users_favorited >= 2
+        @featured_establishments << establishment
+      end
+    end
+  end
+
   def show
     # Only will show deals that are active
     @current_deals = Deal.all.where(establishment_id: @establishment, temporary: true, active: true)

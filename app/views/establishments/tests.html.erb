@@ -1,0 +1,39 @@
+
+<div class="content-container">
+  <div class="container-fluid tab-pane fade in active">
+      <table
+             data-toggle="table"
+             data-search="true">
+          <thead>
+              <tr> 
+                  <th data-field="one"
+                      data-sortable="true">
+                      Name
+                  </th>
+                  <th data-field="two"
+                      data-sortable="true">
+                      Keywords
+                  </th>
+                  <th data-field="three"
+                      data-sortable="true">
+                      Active Deals
+                  </th>
+                  <th data-field="four"
+                      data-sortable="true">
+                      City
+                  </th>
+             </tr>                   
+         </thead>
+        <% @establishments.each do |establishment| %>
+        <tr>
+          <td> <%= link_to establishment.name, establishment %> </td>
+          <td> <%= establishment.key %> </td>
+          <td> <%= establishment.total_active_deals %> </td>
+          <td> <%= establishment.city %> </td>
+
+        </tr>
+        <% end %>
+      </table>
+
+</div>
+</div>

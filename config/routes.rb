@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'establishments/tests', to: 'establishments#tests'
   
   devise_for :users
   # get 'home/index'
