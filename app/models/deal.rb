@@ -1,6 +1,7 @@
 class Deal < ActiveRecord::Base
 
 	belongs_to :establishment
+	# has_one :user, through: :establishment 
 
 	# Favorited by users
 	has_many :favorite_deals # just the 'relationships'
@@ -29,7 +30,7 @@ class Deal < ActiveRecord::Base
 			if user.favorited_deals.include? self
 				@count+=1
 			end
-		end	
+		end
 		@count
 	end
 

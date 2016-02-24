@@ -29,24 +29,44 @@
         </p>
       </div>
 
-      <div class="featurette">
+      <div class="featurette" style="display:inline-block;">
         <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
         <% if current_user %>
-          <h2 class="featurette-heading" style="color:red;">Establishment</h2>
+          <h2 class="featurette-heading" style="color:red;">Day of Week</h2>
           <div class="field">
-              <%= f.select :weekday, ['Today', 'Monday', 'Tuesday', 'Wednesday',
+              <%= f.select :weekday, [['Today', Time.now.strftime("%A")], 'Monday', 'Tuesday', 'Wednesday',
                 'Thursday', 'Friday', 'Saturday', 'Sunday'] %>
                <!-- f.collection_select :establishment, Establishment.all, :id, :name  -->
           </div>
         <% end %>
       </div>
 
-      <div class="featurette">
+      <div class="featurette" style="display:inline-block;">
+        <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
+        <% if current_user %>
+          <h2 class="featurette-heading" style="color:red;">Start Time</h2>
+          <div class="field">
+            <%= f.time_field :start_time %>
+          </div>
+
+        <% end %>
+      </div>
+
+      <div class="featurette" style="display:inline-block;">
+        <% if current_user %>
+          <h2 class="featurette-heading" style="color:red;">End Time</h2>
+          <div class="field">
+            <%= f.time_field :end_time  %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="featurette" style="display:none;">
         <!-- <img class="featurette-image pull-right" src="../assets/chrome.png"> -->
         <h2 class="featurette-heading" style="color:red;">Status</h2>
         <div class="field" id="details">
           <%= f.label "Click if a temporary deal" %>
-          <%= f.check_box :temporary %> 
+          <%= f.check_box :temporary %>
           <%= f.label "Click if an ongoing special" %>
           <%= f.check_box :permanent %></br>
         </div>

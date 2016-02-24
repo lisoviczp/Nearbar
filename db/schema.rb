@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160205040552) do
+ActiveRecord::Schema.define(version: 20160224021855) do
 
   create_table "deals", force: true do |t|
     t.string   "keyword"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20160205040552) do
     t.integer  "establishment_id"
     t.boolean  "active"
     t.string   "weekday"
+    t.time     "start_time"
+    t.time     "end_time"
   end
 
   create_table "establishments", force: true do |t|

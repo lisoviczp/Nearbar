@@ -26,3 +26,8 @@ en:
     time:
       formats:
         sample: '%d.%m.%Y'
+
+en:
+    end_time:
+      formats:
+        sample: '%I:%M%p'

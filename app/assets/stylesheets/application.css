@@ -30,7 +30,7 @@
 
  h4#sidebar-header {
   color:#668eaa;
- } 
+ }
 
 #wrapper, #right-sidebar-wrapper {
   /*border: 1px solid green;*/
@@ -218,7 +218,7 @@ hr {
 	padding-top: 1em;
 	padding-left: 3em;
 	padding-right: 3em;
-	padding-bottom: 7em;	
+	padding-bottom: 7em;
 }
 
 
@@ -336,7 +336,7 @@ li {
 }
 
 #footnote-text {
-  font-size: 0.65em;
+  font-size: 0.80em;
 }
 
 
@@ -345,7 +345,7 @@ li {
 }
 
 ul.nav li.dropdown:hover > ul.dropdown-menu {
-    display: block;    
+    display: block;
 }
 
 ul.dropdown-menu {
@@ -399,7 +399,7 @@ textarea#deal_description {
 
 .semi-background {
   background-image: url('barback.png');
-  padding-bottom: 10em;  
+  padding-bottom: 10em;
 }
 
 p.alert {
@@ -415,7 +415,29 @@ p.notice {
   text-align: center;
 }
 
+#error_explanation {
+  background-color: white;
+  border: 2px solid red;
+  border-radius: 3px;
+  font-weight: 100;
+  text-decoration: none;
+  font-family: helvetica;
+}
 
+#error_explanation h2 {
+  font-family: helvetica;
+  color:red;
+  background-color: white;
+  font-weight: 200;
+}
+
+#error_explanation ul{
+  text-decoration: none;
+}
+
+#error_explanation ul li{
+  text-decoration: none;
+}
 /*a {
   color: green;
 }*/

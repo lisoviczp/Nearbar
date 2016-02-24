@@ -12,7 +12,8 @@ class DealsController < ApplicationController
     if params[:search]
       @deals = Deal.search(params[:search])
     else
-      @deals = Deal.all.where(active: true)
+      # @deals = Deal.all.where(active: true)
+      @deals=Deal.all.where(active: true).order('updated_at DESC')
     end
 
     @featured_deals = Deal.where(
@@ -44,7 +45,7 @@ class DealsController < ApplicationController
 
   def send_text_message(receiving_number, new_deal_establishment, new_deal_message)
     # number_to_send_to = params[:number_to_send_to]
-    
+
     number_to_send_to = receiving_number
     # number_to_send_to='9738680162'
 
@@ -124,6 +125,14 @@ class DealsController < ApplicationController
     respond_with(@deal)
   end
 
+  def your_deals
+    # @deals = Deal.where(user: current_user)
+    @establishments = Establishment.where(user: current_user)
+
+
+  end
+
+
   def update
     @deal.update(deal_params)
     @deal.save
@@ -141,6 +150,6 @@ class DealsController < ApplicationController
     end
 
     def deal_params
-      params.require(:deal).permit(:keyword, :description, :temporary, :permanent, :establishment_id, :active, :weekday)
+      params.require(:deal).permit(:keyword, :description, :temporary, :permanent, :establishment_id, :active, :weekday, :start_time, :end_time)
     end
 end

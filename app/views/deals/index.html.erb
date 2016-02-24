@@ -1,6 +1,6 @@
 
 <style>
-  
+
 #left-nav.col-md-3{
   /*border-left: 1px solid gray;*/
   border-right: 1px solid gray;
@@ -30,7 +30,7 @@
       <% @featured_deals.each do |deal| %>
         <div id="details">
           <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-            <% if user_signed_in? and current_user.favorited_deals.include? deal %> 
+            <% if user_signed_in? and current_user.favorited_deals.include? deal %>
               <span id="bold-large-link-glyph">
                 <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
                   <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
@@ -43,11 +43,11 @@
 
             <% end %>
             <% if deal.establishment %>
-              <p> by 
+              <p> by
                 <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span>
                 <span id="footnote-text"><% deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%></span>
-                <% if deal.weekday == 'Today' %>
-                  </br><%= deal.weekday %>!
+                <% if deal.weekday == 'Today' or deal.weekday == Time.now.strftime("%A") %>
+                  </br> Today (<%= deal.weekday %>)!
                 <% else %>
                   </br>On <%= deal.weekday %>'s
                 <% end %>
@@ -64,9 +64,9 @@
       <h1 class="important-header" id="">All Deals</h1>
       <% @deals.each do |deal| %>
         <div class="featurette">
-            <h3 class="featurette-heading"> 
+            <h3 class="featurette-heading">
               <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-                <% if user_signed_in? and current_user.favorited_deals.include? deal %> 
+                <% if user_signed_in? and current_user.favorited_deals.include? deal %>
                   <span id="bold-large-link-glyph">
                     <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
                       <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
@@ -84,19 +84,20 @@
 
             <div class="field">
               <% if deal.establishment %>
-                <p> by 
-                  <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %></span> 
+                <p> by
+                  <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %></span>
                   <span class="address-oneliner">
                      <%= deal.establishment.address %>
                      <%= deal.establishment.city %>
                      <%= deal.establishment.state %>
-                     <%= deal.establishment.zipcode %> 
+                     <%= deal.establishment.zipcode %>
                   </span> </br>
                   <span id="footnote-text"> <% deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%> </span> <!-- Not Displaying -->
                 </p>
               <% end %>
 
-              <%= deal.description %>
+              <%= deal.description %> </br>
+              <%= deal.start_time.strftime("%I:%M%p") if deal.start_time %> until <%= deal.end_time.strftime("%I:%M%p") if deal.end_time %>
 
               <p>
                 Favorited by <%= deal.get_likes %> user(s) |
@@ -106,11 +107,11 @@
                 <% else %>
                   <span style="color:black;"> This is permanently offered bc we love you </span>
                 <% end %>
-                <% if deal.weekday == 'Today' %>
-                  </br><%= deal.weekday %>!
+                <% if deal.weekday == 'Today' or deal.weekday == Time.now.strftime("%A") %>
+                  </br>Today!
                 <% else %>
                   </br>On <%= deal.weekday %>'s
-                <% end %>                        
+                <% end %>
               </p>
             </div>
 
@@ -127,7 +128,7 @@
         <% @todays_deals.each do |deal| %>
           <div id="details">
             <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-              <% if user_signed_in? and current_user.favorited_deals.include? deal %> 
+              <% if user_signed_in? and current_user.favorited_deals.include? deal %>
                 <span id="bold-large-link-glyph">
                   <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
                     <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
@@ -140,14 +141,14 @@
 
               <% end %>
               <% if deal.establishment %>
-                <p> by 
+                <p> by
                   <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span>
                   <span id="footnote-text"><% deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%></span>
-                  <% if deal.weekday == 'Today' %>
-                    </br><%= deal.weekday %>!
+                  <% if deal.weekday == 'Today' or deal.weekday == Time.now.strftime("%A") %>
+                    </br> Today!
                   <% else %>
                     </br>On <%= deal.weekday %>'s
-                  <% end %>                  
+                  <% end %>
                 </p>
               <% end %>
             </div>
@@ -156,4 +157,3 @@
     </div>
 
 </div>
-

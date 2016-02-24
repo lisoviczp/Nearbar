@@ -3,9 +3,9 @@
 <div class="show-establishment-box">
       <div class="field">
 		<h3 style="display:inline;">
-		  <div id="details"> 
+		  <div id="details">
 		  	<span id="bold-large-link"><%= @deal.keyword %> </span>
-	            <% if user_signed_in? and current_user.favorited_deals.include? @deal %> 
+	            <% if user_signed_in? and current_user.favorited_deals.include? @deal %>
 	              <span id="bold-large-link-glyph">
 	                <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(@deal, type: "unfavorite"), method: :put %>
 	                </a>
@@ -23,26 +23,31 @@
 <!-- 	        <p>
 	          <%= link_to "favorite",   favorite_deal_path(@deal, type: "favorite"), method: :put %> </br>
 	          <%= link_to "unfavorite",   favorite_deal_path(@deal, type: "unfavorite"), method: :put %>
-	        </p> -->	        
+	        </p> -->
 
-		<p style="display:inline;"> 
+		<p style="display:inline;">
 		</br> at
-		   <div id="details"> 
+		   <div id="details">
 		   	<span id="bold-link"> <%= link_to @deal.establishment.name, establishment_path(@deal.establishment) if @deal.establishment %> </span>
 		   </div>
 		</p>
 
 		<p>
-			 <%= @deal.establishment.address if @deal.establishment %> <%=@deal.establishment.city if @deal.establishment%> 
+			 <%= @deal.establishment.address if @deal.establishment %> <%=@deal.establishment.city if @deal.establishment%>
 			 <%=@deal.establishment.zipcode if @deal.establishment %>
 		</p>
 
 		<hr>
 
 		<p style="display:inline;">
-		  <div id="details"><%= @deal.description %></div> (On <%= @deal.weekday %>'s) 
-
+		  <div id="details"><%= @deal.description %></div> (On <%= @deal.weekday %>'s)
 		</p>
+
+    <p style="display:inline;">
+      <% if @deal.start_time and @deal.end_time %>
+  		  <div id="details"><%= @deal.start_time.strftime("%I:%M%p") %> until <%= @deal.end_time.strftime("%I:%M%p") %></div>
+      <% end %>
+    </p>
 
 		<p>
 		  <% if @deal.temporary? %>
@@ -52,8 +57,9 @@
 			<% end %>
 		</p>
 
-		
-		<div class="testing" style="display:none;"> 
+
+
+		<div class="testing" style="display:none;">
 			(For Testing) </br>
 			<p style="display:inline;">
 			  temporary?
@@ -65,19 +71,24 @@
 			  <div id="details"><%= @deal.permanent %> </div>
 			</p>
 		</div>
-		
+
 	  </div>
 
       <div id="center-info">
 
 		  Favorited by <%= @deal.get_likes %> users </br>
-
-		  <% if user_signed_in? and current_user.establishments.include? @deal.establishment  %> 
-			  <%= link_to ('<span style="" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>').html_safe, deals_path %> | 
+      <h4>
+        <span id="bold-large-link-glyph" style="display:inline;">
+        <%= link_to ('<span style="" class="glyphicon glyphicon-phone" aria-hidden="true"></span>').html_safe, root_path %>
+        </span>
+        <div id="small-text" style="display:inline;">
+          Click to receive texts <span id="footnote-text">(You will be notified whenever this deal is active!)</span>
+        </div>
+      </h4>
+		  <% if user_signed_in? and current_user.establishments.include? @deal.establishment  %>
+			  <%= link_to ('<span style="" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>').html_safe, deals_path %> |
 			  <%= link_to ('<span style="" class="glyphicon glyphicon-edit" aria-hidden="true"></span>').html_safe, edit_deal_path(@deal) %> |
-	          <%= link_to ('<span style="" class="glyphicon glyphicon-trash" aria-hidden="true"></span>').html_safe, @deal, method: :delete, data: { confirm: 'Are you sure?' } %> 
+	          <%= link_to ('<span style="" class="glyphicon glyphicon-trash" aria-hidden="true"></span>').html_safe, @deal, method: :delete, data: { confirm: 'Are you sure?' } %>
 		  <% end %>
 	  </div>
 </div>
-
-

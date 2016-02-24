@@ -1,7 +1,7 @@
 <!-- trying to use bootstrap's grid layout... -->
 
 <style>
-  
+
 #left-nav.col-md-3{
 /*  border-left: 1px solid gray;
   border-right: 1px solid gray;
@@ -68,9 +68,9 @@
       <h1 class="important-header" id="">All Deals</h1>
         <% @deals.each do |deal| %>
           <div class="featurette">
-              <h3 class="featurette-heading"> 
+              <h3 class="featurette-heading">
                 <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-                  <% if current_user.favorited_deals.include? deal %> 
+                  <% if current_user.favorited_deals.include? deal %>
                     <span id="bold-large-link-glyph">
                       <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
                         <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
@@ -88,13 +88,13 @@
 
               <div class="field">
                 <% if deal.establishment %>
-                  <p> by 
-                    <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %></span> 
+                  <p> by
+                    <span id="bold-link"> <%= link_to deal.establishment.name, deal.establishment %></span>
                     <span class="address-oneliner">
                        <%= deal.establishment.address %>
                        <%= deal.establishment.city %>
                        <%= deal.establishment.state %>
-                       <%= deal.establishment.zipcode %> 
+                       <%= deal.establishment.zipcode %>
                     </span> </br>
                     <span id="footnote-text"> <% deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%> </span>
                   </p>
@@ -119,11 +119,11 @@
     </div>
 
     <div class="col-md-3" id="right-nav">
-      <h4 class="important-header"> Today's Deals </h4>    
+      <h4 class="important-header"> Today's Deals </h4>
       <% @todays_deals.each do |deal| %>
         <div id="details">
           <span id="bold-large-link"><%= link_to deal.keyword, deal %></span>
-            <% if current_user.favorited_deals.include? deal %> 
+            <% if current_user.favorited_deals.include? deal %>
               <span id="bold-large-link-glyph">
                 <%= link_to ('<span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>').html_safe,   favorite_deal_path(deal, type: "unfavorite"), method: :put %>
                   <!-- <span style="" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> -->
@@ -136,7 +136,7 @@
 
             <% end %>
             <% if deal.establishment %>
-              <p> by 
+              <p> by
                 <span id="bold-link"><%= link_to deal.establishment.name, deal.establishment %> </span>
                 <span id="footnote-text"><% deal.updated_at.strftime("%a. %m/%d/%y at %I:%M%p")%></span>
               </p>
@@ -148,6 +148,12 @@
   </div>
 
 
+<script>
 
+  // $(document).ready(function() {
+  //   alert(document.cookie);
+  })
+
+</script>
 
 </div>

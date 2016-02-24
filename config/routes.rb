@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'establishments/tests', to: 'establishments#tests'
-  
+
   devise_for :users
   # get 'home/index'
 
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   # Favorites route for showing the current user's establishments
   get '/your_establishments', to: 'establishments#your_establishments', as: :your_establishments
+  get '/your_deals', to: 'deals#your_deals', as: :your_deals
 
   # Favorites route for favoriting establishments
   get '/favorites', to: 'establishments#favorites_page', as: :favorites_page

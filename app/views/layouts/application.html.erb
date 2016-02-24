@@ -30,45 +30,50 @@
 
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li>
-            <%= link_to ('New Establishment <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>').html_safe, new_establishment_path %>
-          </li>
-
-          <% if current_user.establishments.size > 0 %>
-            <li>
-              <%= link_to ('New Deal <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>').html_safe, new_deal_path %>
-            </li>
-          <% end %>
-          <li>
-            <a href="#"><%= current_user.username %></a>
-          </li>
-          <li class="dropdown">            
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Account</a>
-              <ul class="dropdown-menu">
-                <li> <%= link_to('Info', info_page_path) %> </li>
-                <li class=""><a href="/your_establishments">Your Establishments </a></li>
-                <li class=""><a href="/your_establishments">Your Deals </a></li>
-                <li class=""><a href="/favorite_deals">Favorite Deals</a></li>
-                <li role="separator" class="divider"></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">New <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+            <ul class="dropdown-menu">
+              <% if current_user.establishments.size > 0 %>
                 <li>
-                  <%= link_to('Edit Account', edit_user_path(current_user)) %>        
+                  <%= link_to ('New Deal').html_safe, new_deal_path %>
                 </li>
-                <li>
-                  <%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %>        
-                </li>
-              </ul>
-          </li>
+              <% end %>
+              <li>
+                <%= link_to ('New Establishment').html_safe, new_establishment_path %>
+              </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><%= current_user.username %></a>
+            <ul class="dropdown-menu">
+              <li class=""><a href="/your_deals">Your Deals </a></li>
+              <li class=""><a href="/your_establishments">Your Establishments </a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Account</a>
+            <ul class="dropdown-menu">
+              <li> <%= link_to('Info', info_page_path) %> </li>
+              <li>
+                <%= link_to('Edit Account', edit_user_path(current_user)) %>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %>
+              </li>
+            </ul>
+        </li>
         <% else %>
           <li>
-            <%= link_to('Info', info_page_path)  %>  
+            <%= link_to('Info', info_page_path)  %>
           </li>
           <li>
-            <%= link_to('Sign In', new_user_session_path)  %>  
+            <%= link_to('Sign In', new_user_session_path)  %>
           </li>
         <% end %>
       </ul>
 
-      
+
     </div><!-- /.navbar-collapse -->
 </nav>
 <!-- </div> -->
@@ -93,7 +98,7 @@
 
 <!-- Optional theme -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
-       
+
 
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>

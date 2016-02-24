@@ -1,0 +1,89 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.js"></script>
+
+
+<!-- This is the LEFT SideBar, where we will show the User's etablishments and/or Favorited establishments -->
+
+<div class="container-fluid">
+    <div class="col-md-2" id="left-nav">
+      <h4 class="important-header" id="center-text"> Featured Deals </h4>
+    </div>
+
+    <!-- This is where all the Deals will be listed -->
+    <div class="col-md-9" id="middle">
+      <ul class="nav nav-tabs" role="tablist">
+        <% @establishments.each do |establishment| %>
+        <li class="">
+             <a href="#establishment-<%=establishment.id%>" data-toggle="tab"> <%= establishment.name %></a>
+        </li>
+        <% end %>
+      </ul>
+
+         <!-- Tab panes -->
+         <div class="tab-content">
+             <!-- all buyers Tab -->
+
+             <% @establishments.each do |establishment| %>
+             <div class="container-fluid tab-pane fade in active" id="establishment-<%=establishment.id%>">
+                 <table class=""
+                        data-toggle="table"
+                        data-pagination="true"
+                        data-search="true"
+                        data-page-size="200"
+                        data-toolbar="#toolbar"
+                        id="">
+                     <caption><%= establishment.name %></caption>
+                     <thead>
+                         <tr>
+                             <th data-field="Deal-name"
+                                 data-align="left"
+                                 data-sortable="true">
+                                 Name
+                             </th>
+                             <th data-field="Deal-description"
+                                 data-align="left"
+                                 data-sortable="true">
+                                 Description
+                             </th>
+                             <th data-field="Deal-day"
+                                 data-align="left"
+                                 data-sortable="true">
+                                 Day
+                             </th>
+                             <th data-field="Deal-active"
+                                 data-align="left"
+                                 data-sortable="true">
+                                 Active
+                             </th>
+                             <th data-field="Deal-start"
+                                 data-align="left"
+                                 data-sortable="true">
+                                 Start Time
+                             </th>
+                             <th data-field="Deal-end"
+                                 data-align="left"
+                                 data-sortable="true">
+                                 End Time
+                             </th>
+                        </tr>
+                    </thead>
+                     <% establishment.deals.each do |deal| %>
+     	               <tr>
+                       <td> <%= deal.keyword %></td>
+                       <td> <%= deal.description %> </td>
+                       <td> <%= deal.weekday %> </td>
+     		               <td> <%= deal.active %> </td>
+                       <td> <%= deal.start_time.strftime("%I:%M%p") if deal.start_time %></td>
+                       <td> <%= deal.end_time.strftime("%I:%M%p") if deal.end_time %></td>
+     	               </tr>
+                     <% end %>
+                </table>
+             </div>
+             <% end %>
+         </div>
+
+    </div>
+
+
+
+</div>
