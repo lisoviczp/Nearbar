@@ -43,10 +43,10 @@ class Establishment < ActiveRecord::Base
 		@count=0
 
 		if self.deals.where(current: true).size > 0
-			@count += self.deals.where(current: true).size 
+			@count += self.deals.where(current: true).size
 		end
-		if self.deals.where(permanent: true).size 
-			@count += self.deals.where(permanent: true).size 
+		if self.deals.where(permanent: true).size
+			@count += self.deals.where(permanent: true).size
 		end
 
 		@count

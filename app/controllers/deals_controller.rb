@@ -43,11 +43,58 @@ class DealsController < ApplicationController
     respond_with(@deal)
   end
 
+
+  def receive_text_test
+    twiml = Twilio::TwiML::Response.new do |r|
+      r.Message "Hey Monkey. Thanks for the message!"
+    end
+    render twiml.text
+    # r.Message do |message|
+    # message.Body "Body"
+    # message.Media "https://demo.twilio.com/owl.png"
+    # message.Media "https://demo.twilio.com/logo.png"
+    # end
+  end
+
+
+# This works!!
+  def send_text_test
+    # pry
+    number_to_send_to='9738680162'
+    # number_to_send_to='9548016497'
+
+    # Creating message to send
+    new_message ='Welcome to BarFly! $1 BEERS AT GYMBAR - NOW TILL CLOSE!!!!'
+
+    twilio_sid=ENV['TWILIO_SID']
+    twilio_token = ENV['TWILIO_TOKEN']
+    twilio_phone_number = "2016853575"
+
+    puts "Twilio sending: "
+    # puts twilio_sid
+    # puts twilio_token
+    puts "Text Message Info: "
+    puts number_to_send_to, new_message
+
+
+    @twilio_client = Twilio::REST::Client.new twilio_sid, twilio_token
+
+    # Uncomment this to send it.. it works!!!
+    # @twilio_client.account.sms.messages.create(
+    #   :from => "+1#{twilio_phone_number}",
+    #   :to => number_to_send_to,
+    #   :body => new_message
+    # )
+
+  end
+
+# This works!!..
   def send_text_message(receiving_number, new_deal_establishment, new_deal_message)
     # number_to_send_to = params[:number_to_send_to]
+    # pry
 
-    number_to_send_to = receiving_number
-    # number_to_send_to='9738680162'
+    # number_to_send_to = receiving_number
+    number_to_send_to='9738680162'
 
     # Creating message to send
     new_message = new_deal_establishment += ': '

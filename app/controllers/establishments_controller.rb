@@ -53,7 +53,9 @@ class EstablishmentsController < ApplicationController
     # Only will show deals that are active
     @current_deals = Deal.all.where(establishment_id: @establishment, temporary: true, active: true)
     @permanent_deals = Deal.all.where(establishment_id: @establishment, temporary: false, active: true)
-    
+
+    # daily_email(@establishment)
+
     today=Time.now.strftime("%A")
     @todays_deals = Deal.where(establishment_id: @establishment, weekday: ['Today', today])
 
@@ -94,7 +96,7 @@ class EstablishmentsController < ApplicationController
     else
       redirect_to establishments_path
     end
-    
+
   end
 
   def your_establishments
@@ -102,10 +104,33 @@ class EstablishmentsController < ApplicationController
   end
 
 
+  def weekly_email
+    puts "Sending weekly email"
+    EstablishmentMailer.weekly_email().deliver!
+  end
+
+  def daily_email(estab)
+
+    @establishment = estab
+    users_to_email = @establishment.favorited_by
+    @specials = "This is where we list the specials!"
+
+    # uncomment this to send to all users that favorited the establishment
+    # users_to_email.each do |user|
+    #   # puts "Sending daily email to #{user}"
+    #   EstablishmentMailer.daily_email(specials).deliver!
+    # end
+
+    EstablishmentMailer.daily_email(@specials).deliver!
+  end
+
   def create
     @establishment = Establishment.new(establishment_params)
     @establishment.user = current_user
     @establishment.save
+
+    # daily_email
+
     respond_with(@establishment)
   end
 

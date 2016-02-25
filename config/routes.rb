@@ -34,6 +34,12 @@ Rails.application.routes.draw do
   # get 'about' => 'home#about'
 
 
+  # sending text test url
+  get 'send_text_test', to: 'deals#send_text_test'
+
+  # receiving text test url
+  get 'receive_text_test', to: 'deals#receive_text_test'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
